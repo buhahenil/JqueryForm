@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI.WebControls;
+using WebApplication1.Classes;
 
 namespace WebApplication1
 {
@@ -23,14 +24,14 @@ namespace WebApplication1
     [ScriptService]
     public class PersonService : System.Web.Services.WebService
     {
-        public string connectionString;
+        public string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
 
         [WebMethod]
         public void AddPerson(string per)
         {
             Person person = JsonConvert.DeserializeObject<Person>(per);
 
-            string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
+            //string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("sppersonCrud", con);
@@ -101,10 +102,9 @@ namespace WebApplication1
                 cmd.ExecuteNonQuery();
             }
         }
-
-        
         [WebMethod]
-        public void getCountry()
+        [ScriptMethod]
+        public List<Country> GetCountries()
         {
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand("spGetCountry", con);
@@ -112,8 +112,14 @@ namespace WebApplication1
             cmd.CommandType = CommandType.StoredProcedure;
             DataTable dt = new DataTable();
             sda.Fill(dt);
-            //List<Country>
-            
+
+            List<Country> lst = new List<Country>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                lst.Add(new Country() { CountryId = Convert.ToInt32(dr["CountryId"]), CountryName = Convert.ToString(dr["CountryName"]) });
+            }
+            return lst;
+
         }
     }
 }

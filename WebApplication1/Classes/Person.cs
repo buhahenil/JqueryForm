@@ -1,4 +1,4 @@
-﻿namespace WebApplication1
+﻿namespace WebApplication1.Classes
 {
     public class Person
     {
@@ -15,15 +15,5 @@
         public string Gender { get; set; }
         public string Hobbies { get; set; }
     }
-    public class Country
-    {
-        public int CountryId { get; set; }
-        public string CountryName { get; set; }
-    }
-    public class State
-    {
-        public int StateId { get; set; }
-        public string StateName { get; set; }
-        public int CounrtyId { get; set; }
-    }
+    
 }

@@ -200,6 +200,23 @@
                 }
             });
         });
+
+        $.ajax({
+            type: "POST",
+            url: "PersonService.asmx/GetCountries",
+            //data: JSON.stringify(values),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (res) {
+                debugger;
+                $.each(res.d, function (data, value) {
+                    $("#ddlCountry").append($("<option></option>").val(value.CountryId).html(value.CountryName));
+                })
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
     });
 </script>
 </html>

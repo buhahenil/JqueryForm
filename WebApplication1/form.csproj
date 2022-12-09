@@ -81,10 +81,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Country.cs" />
+    <Compile Include="Classes\State.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Person.cs" />
+    <Compile Include="Classes\Person.cs" />
     <Compile Include="PersonService.asmx.cs">
       <DependentUpon>PersonService.asmx</DependentUpon>
       <SubType>Component</SubType>
