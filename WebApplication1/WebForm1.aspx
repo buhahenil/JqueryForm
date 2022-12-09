@@ -169,10 +169,13 @@
             person.birthday = $("#txtbirthday").val();
             person.Gender = $("input[type='radio']:checked").val();
             //person.Hobbies = $("input[type='checkbox']:checked").val();
+
             var val = [];
             $(':checkbox:checked').each(function (i) {
                 val[i] = $(this).val();
             });
+
+
             //$.each($("input[type='checkbox']:checked"), function () {
             //    arr.push($(this).val());
             //});
