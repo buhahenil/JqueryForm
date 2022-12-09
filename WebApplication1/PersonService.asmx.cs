@@ -121,5 +121,26 @@ namespace WebApplication1
             return lst;
 
         }
+        [WebMethod]
+        [ScriptMethod]
+        public List<State> GetState(int CountryId)
+        {
+
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("spGetStateByCountry", con);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@CountryId", CountryId);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+
+            List<State> lst = new List<State>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                lst.Add(new State() { StateId = Convert.ToInt32(dr["StateId"]), StateName = Convert.ToString(dr["StateName"])});
+
+            }
+            return lst;
+        }
     }
 }

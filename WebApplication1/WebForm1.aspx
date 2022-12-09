@@ -200,7 +200,7 @@
                 }
             });
         });
-
+        // Country Dropdouwn list 
         $.ajax({
             type: "POST",
             url: "PersonService.asmx/GetCountries",
@@ -216,6 +216,32 @@
             error: function (err) {
                 console.log(err);
             }
+        });
+        $("#ddlCountry").change(function () {
+            var CountryId = parseInt($(this).val());
+            if (!isNaN(CountryId)) {
+                var ddlState = $('#ddlState');
+                ddlState.empty();
+                debugger;
+            $.ajax({
+                url: "PersonService.asmx/GetState",
+                type: "POST",
+                dataType: "json",
+                data: { CountryId: CountryId },
+                success: function (res) {
+                //ddlState.empty(); // Clear the please wait  
+                ddlState.append($("<option></option>").val('').html('Select State'));
+                $.each(d, function (data, value) {
+                    $("#ddlState").append($("<option></option>").val(states.StateId).html(states.StateName));
+                    });
+                },
+                error: function () {
+                    alert('Error!');
+                    }
+                });
+            }
+
+
         });
     });
 </script>
