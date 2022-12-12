@@ -180,7 +180,7 @@
             //    arr.push($(this).val());
             //});
             //person.Hobbies = arr;
-            debugger;
+            //debugger;
 
             var values = {};
             values.per = JSON.stringify(person);
@@ -191,24 +191,27 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                    debugger;
+                    //debugger;
                     console.log(data);
                 },
                 error: function (err) {
-                    debugger;
+                    //debugger;
                     console.log(err);
                 }
             });
         });
+
+
         // Country Dropdouwn list 
+        
         $.ajax({
             type: "POST",
-            url: "PersonService.asmx/GetCountries",
+            url: "/PersonService.asmx/GetCountries",
             //data: JSON.stringify(values),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (res) {
-                debugger;
+                //debugger;
                 $.each(res.d, function (data, value) {
                     $("#ddlCountry").append($("<option></option>").val(value.CountryId).html(value.CountryName));
                 })
@@ -217,32 +220,66 @@
                 console.log(err);
             }
         });
+
+        // State Dropdouwn list
         $("#ddlCountry").change(function () {
-            var CountryId = parseInt($(this).val());
+            $("#ddlState").trigger("change");
+            var CountryId = $(this).val();
             if (!isNaN(CountryId)) {
                 var ddlState = $('#ddlState');
-                ddlState.empty();
-                debugger;
-            $.ajax({
-                url: "PersonService.asmx/GetState",
-                type: "POST",
-                dataType: "json",
-                data: { CountryId: CountryId },
-                success: function (res) {
-                //ddlState.empty(); // Clear the please wait  
-                ddlState.append($("<option></option>").val('').html('Select State'));
-                $.each(d, function (data, value) {
-                    $("#ddlState").append($("<option></option>").val(states.StateId).html(states.StateName));
-                    });
-                },
-                error: function () {
-                    alert('Error!');
+                //ddlState.empty();
+                var Cid = {};
+                Cid.CounrtyId = CountryId;
+                $.ajax({
+                    url: "/PersonService.asmx/GetState",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(Cid),
+                    success: function (res) {
+                        debugger;
+                        ddlState.empty(); // Clear the please wait  
+                        ddlState.append($("<option></option>").val('').html('--Select State--'));
+                        $.each(res.d, function (data, value) {
+                            $("#ddlState").append($("<option></option>").val(value.StateId).html(value.StateName));
+                        });
+                    },
+                    error: function (err) {
+                        console.log(err);
                     }
                 });
             }
-
-
         });
+
+        // City Dropdouwn list
+        $("#ddlState").change(function () {
+            var StateId = $(this).val();
+            if(!isNaN(StateId)) {
+                var ddlCity = $('#ddlCity');
+                var CiId = {};
+                CiId.StateId = StateId;
+                $.ajax({
+                    url: "/PersonService.asmx/GetCity",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(CiId),
+                    success: function (res) {
+                        debugger;
+                        ddlCity.empty(); // Clear the please wait  
+                        ddlCity.append($("<option></option>").val('').html('--Select City--'));
+                        $.each(res.d, function (data, value) {
+                            $("#ddlCity").append($("<option></option>").val(value.CityId).html(value.CityName));
+                        });
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+
+
     });
 </script>
 </html>

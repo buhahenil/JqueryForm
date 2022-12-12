@@ -123,14 +123,14 @@ namespace WebApplication1
         }
         [WebMethod]
         [ScriptMethod]
-        public List<State> GetState(int CountryId)
+        public List<State> GetState(string CounrtyId)
         {
 
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand("spGetStateByCountry", con);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@CountryId", CountryId);
+            cmd.Parameters.AddWithValue("@CountryId", CounrtyId);
             DataTable dt = new DataTable();
             sda.Fill(dt);
 
@@ -138,7 +138,26 @@ namespace WebApplication1
             foreach (DataRow dr in dt.Rows)
             {
                 lst.Add(new State() { StateId = Convert.ToInt32(dr["StateId"]), StateName = Convert.ToString(dr["StateName"])});
+            }
+            return lst;
+        }
 
+        [WebMethod]
+        [ScriptMethod]
+        public List<City> GetCity(String StateId) 
+        {
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("spGetCityByStateId", con);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@StateId", StateId);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+
+            List<City> lst = new List<City>();
+            foreach (DataRow dr in dt.Rows) 
+            {
+                lst.Add(new City() { CityId = Convert.ToInt32(dr["CityId"]), CityName = Convert.ToString(dr["CityName"]) });
             }
             return lst;
         }
