@@ -220,20 +220,22 @@
                 console.log(err);
             }
         });
+        
 
         // State Dropdouwn list
         $("#ddlCountry").change(function () {
-            $("#ddlState").trigger("change");
             var CountryId = $(this).val();
             if (!isNaN(CountryId)) {
                 var ddlState = $('#ddlState');
                 var Cid = {};
                 Cid.CounrtyId = CountryId;
-
+                $("#ddlState").prop("disabled", true);
+                $("#ddlCity").prop("disabled", true);
+                
                 if ($(this).val() != "0")
                 {
                     $("#ddlState").prop("disabled", false);
-                    $("#ddlCity").prop("disabled", false);
+                    
                     $.ajax({
                         url: "/PersonService.asmx/GetState",
                         type: "POST",
@@ -242,7 +244,7 @@
                         data: JSON.stringify(Cid),
                         success: function (res) {
                             //debugger;
-                            ddlState.empty(); // Clear the please wait  
+                            ddlState.empty(); // Clear the please wait 
                             ddlState.append($("<option></option>").val('').html('--Select State--'));
                             $.each(res.d, function (data, value) {
                                 $("#ddlState").append($("<option></option>").val(value.StateId).html(value.StateName));
@@ -268,7 +270,7 @@
                 var ddlCity = $('#ddlCity');
                 var CiId = {};
                 CiId.StateId = StateId;
-
+                $("#ddlCity").prop("disabled", true);
                 if ($(this).val() != "0")
                 {
                     $("#ddlCity").prop("disabled", false);
@@ -297,8 +299,6 @@
                 }
             }
         });
-
-
     });
 </script>
 </html>
