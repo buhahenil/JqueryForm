@@ -100,6 +100,7 @@ namespace WebApplication1
 
                 con.Open();
                 cmd.ExecuteNonQuery();
+                con.Close();
             }
         }
         [WebMethod]
