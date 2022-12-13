@@ -201,9 +201,8 @@
             });
         });
 
-
         // Country Dropdouwn list 
-        
+
         $.ajax({
             type: "POST",
             url: "/PersonService.asmx/GetCountries",
@@ -220,22 +219,16 @@
                 console.log(err);
             }
         });
-        
+
 
         // State Dropdouwn list
         $("#ddlCountry").change(function () {
             var CountryId = $(this).val();
             if (!isNaN(CountryId)) {
-                var ddlState = $('#ddlState');
                 var Cid = {};
                 Cid.CounrtyId = CountryId;
-                $("#ddlState").prop("disabled", true);
-                $("#ddlCity").prop("disabled", true);
-                
-                if ($(this).val() != "0")
-                {
+                if ($(this).val() != "0") {
                     $("#ddlState").prop("disabled", false);
-                    
                     $.ajax({
                         url: "/PersonService.asmx/GetState",
                         type: "POST",
@@ -244,8 +237,7 @@
                         data: JSON.stringify(Cid),
                         success: function (res) {
                             //debugger;
-                            ddlState.empty(); // Clear the please wait 
-                            ddlState.append($("<option></option>").val('').html('--Select State--'));
+                            resetDropDown('ddlState', 'State');
                             $.each(res.d, function (data, value) {
                                 $("#ddlState").append($("<option></option>").val(value.StateId).html(value.StateName));
                             });
@@ -255,24 +247,25 @@
                         }
                     });
                 }
-                else
-                {
-                    $("#ddlState").prop("disabled", true);
-                    $("#ddlCity").prop("disabled", true);
+                else {
+                    disableDropDown('ddlState', 'State');
+                    disableDropDown('ddlCity', 'City');
                 }
+            }
+            else {
+                disableDropDown('ddlState', 'State');
+                disableDropDown('ddlCity', 'City');
             }
         });
 
         // City Dropdouwn list
         $("#ddlState").change(function () {
             var StateId = $(this).val();
-            if(!isNaN(StateId)) {
-                var ddlCity = $('#ddlCity');
+
+            if (!isNaN(StateId)) {
                 var CiId = {};
                 CiId.StateId = StateId;
-                $("#ddlCity").prop("disabled", true);
-                if ($(this).val() != "0")
-                {
+                if ($(this).val() != "0") {
                     $("#ddlCity").prop("disabled", false);
                     $.ajax({
                         url: "/PersonService.asmx/GetCity",
@@ -282,8 +275,7 @@
                         data: JSON.stringify(CiId),
                         success: function (res) {
                             //debugger;
-                            ddlCity.empty();
-                            ddlCity.append($("<option></option>").val('').html('--Select City--'));
+                            resetDropDown('ddlCity', 'City');
                             $.each(res.d, function (data, value) {
                                 $("#ddlCity").append($("<option></option>").val(value.CityId).html(value.CityName));
                             });
@@ -293,12 +285,24 @@
                         }
                     });
                 }
-                else
-                {
-                    $("#ddlCity").prop("disabled", true);
+                else {
+                    disableDropDown('ddlCity', 'City');
                 }
+            }
+            else {
+                disableDropDown('ddlCity','City');
             }
         });
     });
+
+    function disableDropDown(idDrop, name) {
+        $("#" + idDrop + "").prop("disabled", true);
+        resetDropDown(idDrop, name);
+    }
+
+    function resetDropDown(idDrop, name) {
+        $("#" + idDrop + "").empty();
+        $("#" + idDrop + "").append($("<option></option>").val('0').html('--Select ' + name + '--'));
+    }
 </script>
 </html>
