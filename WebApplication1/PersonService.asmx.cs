@@ -122,6 +122,10 @@ namespace WebApplication1
                 result.success = false;
                 result.error = "Enetr only 6 Digit";
             }
+            if (person.Pincode.is) 
+            {
+
+            }
 
 
 
