@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="Classes\City.cs" />
     <Compile Include="Classes\Country.cs" />
+    <Compile Include="Classes\Result.cs" />
     <Compile Include="Classes\State.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

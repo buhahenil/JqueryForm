@@ -27,9 +27,92 @@ namespace WebApplication1
         public string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
 
         [WebMethod]
-        public void AddPerson(string per)
+        public Result AddPerson(string per)
         {
+            Result result = new Result();
             Person person = JsonConvert.DeserializeObject<Person>(per);
+
+            //validetion for this code.
+            
+            // FirstName
+            if (string.IsNullOrWhiteSpace(person.FirstName))
+            {
+                result.success = false;
+                result.error = "FirstName should be required.";
+                return result;
+            }
+            if (person.FirstName.Length > 50) 
+            {
+                result.success = false;
+                result.error = "Maximum 50 characters allowed.";
+                return result;
+            }
+            //if (person.FirstName.)
+            //{
+            //    result.success = false;
+            //    result.error = "Enter Only Alphabets";
+            //    return result;
+            //}
+
+
+            //LastName 
+            if (string.IsNullOrWhiteSpace(person.LastName))
+            {
+                result.success = false;
+                result.error = "LastName should be required.";
+                return result;
+            }
+            if (person.LastName.Length > 50)
+            {
+                result.success = false;
+                result.error = "Maximum 50 characters allowed.";
+                return result;
+            }
+            
+
+            // Moblie Number 
+            if (string.IsNullOrWhiteSpace(person.Mobile))
+            {
+                result.success = false;
+                result.error = "Moblie Number should be required.";
+                return result;
+            }
+            if (person.Mobile.Length >10)
+            {
+                result.success = false;
+                result.error = "only enter 10 digit moblie number.";
+                return result;
+            }
+            if (person.Mobile.Length < 10)
+            {
+                result.success = false;
+                result.error = "only enter 10 digit moblienumber.";
+                return result;
+            }
+            
+
+            // Address..
+
+            if (string.IsNullOrWhiteSpace(person.Address))
+            {
+                result.success = false;
+                result.error = "Address should be required.";
+                return result;
+            }
+            if (person.Address.Length >200) 
+            {
+                result.success = false;
+                result.error = "Only Enter 50 character.";
+                return result;
+            }
+
+            //Country..
+            if (string.IsNullOrEmpty(person.Country)) 
+            {
+                result.success = false;
+                result.error = "Select Country";
+                return result;
+            }
 
             //string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -99,10 +182,20 @@ namespace WebApplication1
                 });
 
                 con.Open();
-                cmd.ExecuteNonQuery();
+                int resultQuery = cmd.ExecuteNonQuery();
                 con.Close();
+
+                if (resultQuery == 1)
+                {
+                    result.success = true;
+                }
+
+                return result;
             }
+
         }
+
+
         [WebMethod]
         [ScriptMethod]
         public List<Country> GetCountries()
@@ -138,14 +231,14 @@ namespace WebApplication1
             List<State> lst = new List<State>();
             foreach (DataRow dr in dt.Rows)
             {
-                lst.Add(new State() { StateId = Convert.ToInt32(dr["StateId"]), StateName = Convert.ToString(dr["StateName"])});
+                lst.Add(new State() { StateId = Convert.ToInt32(dr["StateId"]), StateName = Convert.ToString(dr["StateName"]) });
             }
             return lst;
         }
 
         [WebMethod]
         [ScriptMethod]
-        public List<City> GetCity(String StateId) 
+        public List<City> GetCity(String StateId)
         {
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand("spGetCityByStateId", con);
@@ -156,7 +249,7 @@ namespace WebApplication1
             sda.Fill(dt);
 
             List<City> lst = new List<City>();
-            foreach (DataRow dr in dt.Rows) 
+            foreach (DataRow dr in dt.Rows)
             {
                 lst.Add(new City() { CityId = Convert.ToInt32(dr["CityId"]), CityName = Convert.ToString(dr["CityName"]) });
             }

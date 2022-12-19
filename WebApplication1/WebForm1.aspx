@@ -175,7 +175,6 @@
                 val[i] = $(this).val();
             });
 
-
             //$.each($("input[type='checkbox']:checked"), function () {
             //    arr.push($(this).val());
             //});
@@ -191,6 +190,9 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
+                    if (data.d != null && !data.d.success && data.d.error != null) {
+                        alert(data.d.error);
+                    }
                     //debugger;
                     console.log(data);
                 },
@@ -290,7 +292,7 @@
                 }
             }
             else {
-                disableDropDown('ddlCity','City');
+                disableDropDown('ddlCity', 'City');
             }
         });
     });
@@ -304,5 +306,6 @@
         $("#" + idDrop + "").empty();
         $("#" + idDrop + "").append($("<option></option>").val('0').html('--Select ' + name + '--'));
     }
+    
 </script>
 </html>
