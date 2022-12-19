@@ -47,12 +47,20 @@ namespace WebApplication1
                 result.error = "Maximum 50 characters allowed.";
                 return result;
             }
-            //if (person.FirstName.)
-            //{
-            //    result.success = false;
-            //    result.error = "Enter Only Alphabets";
-            //    return result;
-            //}
+            if (char.IsLetter(person.FirstName)
+            {
+                result.success = false;
+                result.error = "Enter Only Alphabets";
+                return result;
+            }
+
+            //MiddleName...
+            if (person.MiddleName.Length > 50)
+            {
+                result.success = false;
+                result.error = "Maximum 50 characters allowed.";
+                return result;
+            }
 
 
             //LastName 
@@ -77,22 +85,18 @@ namespace WebApplication1
                 result.error = "Moblie Number should be required.";
                 return result;
             }
-            if (person.Mobile.Length >10)
+            if (person.Mobile.Length <10)
             {
                 result.success = false;
                 result.error = "only enter 10 digit moblie number.";
                 return result;
             }
-            if (person.Mobile.Length < 10)
+            if (person.Mobile.) 
             {
-                result.success = false;
-                result.error = "only enter 10 digit moblienumber.";
-                return result;
+
             }
-            
 
             // Address..
-
             if (string.IsNullOrWhiteSpace(person.Address))
             {
                 result.success = false;
@@ -102,17 +106,24 @@ namespace WebApplication1
             if (person.Address.Length >200) 
             {
                 result.success = false;
-                result.error = "Only Enter 50 character.";
+                result.error = "Only Enter 200 character.";
                 return result;
             }
 
-            //Country..
-            if (string.IsNullOrEmpty(person.Country)) 
+            //Pin Code
+            if (string.IsNullOrWhiteSpace(person.Pincode)) 
             {
                 result.success = false;
-                result.error = "Select Country";
+                result.error = "PinCode should be required.";
                 return result;
             }
+            if (person.Pincode.Length<6) 
+            {
+                result.success = false;
+                result.error = "Enetr only 6 Digit";
+            }
+
+
 
             //string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))

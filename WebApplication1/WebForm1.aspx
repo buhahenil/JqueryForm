@@ -45,7 +45,7 @@
                     <span id="lblMobile">Mobile Number</span>
                 </td>
                 <td>
-                    <input name="Mobile" type="text" id="txtMobile" />
+                    <input name="Mobile" type="text" id="txtMobile" maxlength="10" />
                 </td>
             </tr>
 
