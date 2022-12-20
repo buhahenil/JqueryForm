@@ -10,6 +10,7 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI.WebControls;
 using WebApplication1.Classes;
+using System.Text.RegularExpressions;
 
 namespace WebApplication1
 {
@@ -47,10 +48,13 @@ namespace WebApplication1
                 result.error = "Maximum 50 characters allowed.";
                 return result;
             }
-            if (char.IsLetter(person.FirstName)
+            
+            string strRegex = @"(^[A-Z a-z]*$)";
+            Regex re = new Regex(strRegex);
+            if (!re.IsMatch(person.FirstName))
             {
                 result.success = false;
-                result.error = "Enter Only Alphabets";
+                result.error = "Enter the Only alphabets for FirstName.";
                 return result;
             }
 
@@ -61,7 +65,14 @@ namespace WebApplication1
                 result.error = "Maximum 50 characters allowed.";
                 return result;
             }
-
+            string middlename = @"(^[A-Z a-z]*$)";
+            Regex mddname = new Regex(middlename);
+            if (!mddname.IsMatch(person.MiddleName)) 
+            {
+                result.success = false;
+                result.error = "Enter the Only alphabets for MiddleName.";
+                return result;
+            }
 
             //LastName 
             if (string.IsNullOrWhiteSpace(person.LastName))
@@ -76,7 +87,14 @@ namespace WebApplication1
                 result.error = "Maximum 50 characters allowed.";
                 return result;
             }
-            
+            string lastname = @"(^[A-Z a-z]*$)";
+            Regex Lastname = new Regex(lastname);
+            if (!Lastname.IsMatch(person.LastName))
+            {
+                result.success = false;
+                result.error = "Enter the Only alphabets for LastName.";
+                return result;
+            }
 
             // Moblie Number 
             if (string.IsNullOrWhiteSpace(person.Mobile))
@@ -91,9 +109,13 @@ namespace WebApplication1
                 result.error = "only enter 10 digit moblie number.";
                 return result;
             }
-            if (person.Mobile.) 
+            string moblie = @"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$";
+            Regex moblienum = new Regex(moblie);
+            if (!moblienum.IsMatch(person.Mobile)) 
             {
-
+                result.success = false;
+                result.error = "Enter Only Number For Moblie Number.";
+                return result;
             }
 
             // Address..
@@ -122,15 +144,29 @@ namespace WebApplication1
                 result.success = false;
                 result.error = "Enetr only 6 Digit";
             }
-            if (person.Pincode.is) 
-            {
 
+
+            // date of brithday
+            if (string.IsNullOrWhiteSpace(person.birthday)) 
+            {
+                result.success = false;
+                result.error = "Date Of Brith should be required.";
+                return result;
             }
 
+            // Gender
+            if (string.IsNullOrEmpty(person.Gender))
+            {
+                result.success = false;
+                result.error = "Gender should be required.";
+                return result;
+            }
+            // Hobbies
+            //if(person.Hobbies.)
 
 
             //string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(connectionString))
+                using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("sppersonCrud", con);
                 cmd.CommandType = CommandType.StoredProcedure;
