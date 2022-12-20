@@ -35,7 +35,7 @@ namespace WebApplication1
             Person person = JsonConvert.DeserializeObject<Person>(per);
 
             //validetion for this code.
-            
+
             // FirstName
             if (string.IsNullOrWhiteSpace(person.FirstName))
             {
@@ -43,7 +43,7 @@ namespace WebApplication1
                 result.error = "FirstName should be required.";
                 return result;
             }
-            if (person.FirstName.Length > 50) 
+            if (person.FirstName.Length > 50)
             {
                 result.success = false;
                 result.error = "Maximum 50 characters allowed.";
@@ -67,7 +67,7 @@ namespace WebApplication1
             }
             string middlename = @"(^[A-Z a-z]*$)";
             Regex mddname = new Regex(middlename);
-            if (!mddname.IsMatch(person.MiddleName)) 
+            if (!mddname.IsMatch(person.MiddleName))
             {
                 result.success = false;
                 result.error = "Enter the Only alphabets for MiddleName.";
@@ -103,7 +103,7 @@ namespace WebApplication1
                 result.error = "Moblie Number should be required.";
                 return result;
             }
-            if (person.Mobile.Length <10)
+            if (person.Mobile.Length < 10)
             {
                 result.success = false;
                 result.error = "only enter 10 digit moblie number.";
@@ -111,49 +111,52 @@ namespace WebApplication1
             }
             string moblie = @"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$";
             Regex moblienum = new Regex(moblie);
-            if (!moblienum.IsMatch(person.Mobile)) 
+            if (!moblienum.IsMatch(person.Mobile))
             {
                 result.success = false;
                 result.error = "Enter Only Number For Moblie Number.";
                 return result;
             }
 
-            // Address..
+            // Address.....
             if (string.IsNullOrWhiteSpace(person.Address))
             {
                 result.success = false;
                 result.error = "Address should be required.";
                 return result;
             }
-            if (person.Address.Length >200) 
+            if (person.Address.Length > 200)
             {
                 result.success = false;
                 result.error = "Only Enter 200 character.";
                 return result;
             }
 
-            // Country
-            string country = ;
-            Required Coun = new Required(person.country);
-            if (person.Country.Select < Country.>)
+            // Country......
+            if (person.Country == "0")
             {
                 result.success = false;
                 result.error = "Select Country.";
                 return result;
             }
-
-            if (!string.IsNullOrEmpty(Convert.ToString(person.Country)))
+            // State.....
+            if (person.State == "0")
             {
                 result.success = false;
-                result.error = "select Country";
+                result.error = "Select State.";
                 return result;
             }
-
-            // State
-            // City
-
+            
+            // City........
+            if (person.City == "0")
+            {
+                result.success = false;
+                result.error = "City State.";
+                return result;
+            }
+            
             //Pin Code
-            if (string.IsNullOrWhiteSpace(person.Pincode)) 
+            if (string.IsNullOrWhiteSpace(person.Pincode))
             {
                 result.success = false;
                 result.error = "PinCode should be required.";
@@ -161,7 +164,7 @@ namespace WebApplication1
             }
             string pincode = @"^[1-9][0-9]{5}$";
             Regex Pincode = new Regex(pincode);
-            if (!Pincode.IsMatch(person.Pincode)) 
+            if (!Pincode.IsMatch(person.Pincode))
             {
                 result.success = false;
                 result.error = "Enetr only 6 Digit.";
@@ -178,14 +181,14 @@ namespace WebApplication1
             // date of brithday
             if (string.IsNullOrWhiteSpace(person.birthday))
             {
-            string today = DateTime.Today.ToString("MM/dd/yyyy");
-                int age = today.Year - birthday.Year;
-            if (birthday.Date > today.AddYears(-age)) age--;
-                {
+            //    string today = DateTime.Today.ToString("MM/dd/yyyy");
+            //    string age = today.Year - birthday.Year;
+            //    if (birthday.Date > today.AddYears(-age)) age--;
+            //    {
                     result.success = false;
                     result.error = "Date Of Brith should be required.";
                     return result;
-                }
+            //    }
             }
 
             // Gender
@@ -197,12 +200,12 @@ namespace WebApplication1
             }
 
             // Hobbies
-            //if (string.(person.Hobbies))
-            //{
-            //    result.success = false;
-            //    result.error = "Hobbies should be required.";
-            //    return result;
-            //}
+            if (person.Hobbies == "0")
+            {
+                result.success = false;
+                result.error = "Hobbies should be required.";
+                return result;
+            }
 
 
 
