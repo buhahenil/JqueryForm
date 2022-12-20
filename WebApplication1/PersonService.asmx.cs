@@ -134,7 +134,7 @@ namespace WebApplication1
             // Country
             //string country =
             //Required Coun = new Required(person.country);
-            if (person.Country.Select < Country.SelectItem > "0") 
+            if (person.Country.Select < Country.>) 
             {
                 result.success = false;
                 result.error = "Select Country.";
@@ -173,6 +173,10 @@ namespace WebApplication1
                 result.error = "Date Of Brith should be required.";
                 return result;
             }
+            if (person.birthday.) 
+            {
+
+            }
 
             // Gender
             if (string.IsNullOrEmpty(person.Gender))
@@ -183,14 +187,6 @@ namespace WebApplication1
             }
             // Hobbies
             
-            
-            //Terms and Conditions
-            //if (string.IsNullOrWhiteSpace(person.TermsAndConditions))
-            //{
-            //    result.success = false;
-            //    result.error = "Terms And Conditions should be required.";
-            //    return result;
-            //}
 
             //string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))
