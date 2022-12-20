@@ -26,6 +26,7 @@ namespace WebApplication1
     public class PersonService : System.Web.Services.WebService
     {
         public string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
+        private object birthday;
 
         [WebMethod]
         public Result AddPerson(string per)
@@ -132,14 +133,22 @@ namespace WebApplication1
             }
 
             // Country
-            //string country =
-            //Required Coun = new Required(person.country);
-            if (person.Country.Select < Country.>) 
+            string country = ;
+            Required Coun = new Required(person.country);
+            if (person.Country.Select < Country.>)
             {
                 result.success = false;
                 result.error = "Select Country.";
                 return result;
             }
+
+            if (!string.IsNullOrEmpty(Convert.ToString(person.Country)))
+            {
+                result.success = false;
+                result.error = "select Country";
+                return result;
+            }
+
             // State
             // City
 
@@ -167,15 +176,16 @@ namespace WebApplication1
 
 
             // date of brithday
-            if (string.IsNullOrWhiteSpace(person.birthday)) 
+            if (string.IsNullOrWhiteSpace(person.birthday))
             {
-                result.success = false;
-                result.error = "Date Of Brith should be required.";
-                return result;
-            }
-            if (person.birthday.) 
-            {
-
+            string today = DateTime.Today.ToString("MM/dd/yyyy");
+                int age = today.Year - birthday.Year;
+            if (birthday.Date > today.AddYears(-age)) age--;
+                {
+                    result.success = false;
+                    result.error = "Date Of Brith should be required.";
+                    return result;
+                }
             }
 
             // Gender
@@ -185,8 +195,17 @@ namespace WebApplication1
                 result.error = "Gender should be required.";
                 return result;
             }
+
             // Hobbies
-            
+            //if (string.(person.Hobbies))
+            //{
+            //    result.success = false;
+            //    result.error = "Hobbies should be required.";
+            //    return result;
+            //}
+
+
+
 
             //string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))
