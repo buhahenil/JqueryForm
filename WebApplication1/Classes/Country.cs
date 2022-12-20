@@ -7,6 +7,8 @@ namespace WebApplication1.Classes
 {
     public class Country
     {
+        internal static int SelectValue;
+
         public int CountryId { get; set; }
         public string CountryName { get; set; }
     }

@@ -14,6 +14,7 @@
         public string birthday { get; set; }
         public string Gender { get; set; }
         public string Hobbies { get; set; }
+        public string TermsAndConditions { get; set; }
     }
     
 }

@@ -48,7 +48,6 @@ namespace WebApplication1
                 result.error = "Maximum 50 characters allowed.";
                 return result;
             }
-            
             string strRegex = @"(^[A-Z a-z]*$)";
             Regex re = new Regex(strRegex);
             if (!re.IsMatch(person.FirstName))
@@ -132,6 +131,18 @@ namespace WebApplication1
                 return result;
             }
 
+            // Country
+            //string country =
+            //Required Coun = new Required(person.country);
+            if (person.Country.Select < Country.SelectItem > "0") 
+            {
+                result.success = false;
+                result.error = "Select Country.";
+                return result;
+            }
+            // State
+            // City
+
             //Pin Code
             if (string.IsNullOrWhiteSpace(person.Pincode)) 
             {
@@ -139,12 +150,20 @@ namespace WebApplication1
                 result.error = "PinCode should be required.";
                 return result;
             }
-            if (person.Pincode.Length<6) 
+            string pincode = @"^[1-9][0-9]{5}$";
+            Regex Pincode = new Regex(pincode);
+            if (!Pincode.IsMatch(person.Pincode)) 
             {
                 result.success = false;
-                result.error = "Enetr only 6 Digit";3
+                result.error = "Enetr only 6 Digit.";
                 return result;
             }
+            //if (person.Pincode.Length < 6)
+            //{
+            //    result.success = false;
+            //    result.error = "Enetr only 6 Digit";
+            //    return result;
+            //}
 
 
             // date of brithday
@@ -163,11 +182,18 @@ namespace WebApplication1
                 return result;
             }
             // Hobbies
-            //if(person.Hobbies.)
-
+            
+            
+            //Terms and Conditions
+            //if (string.IsNullOrWhiteSpace(person.TermsAndConditions))
+            //{
+            //    result.success = false;
+            //    result.error = "Terms And Conditions should be required.";
+            //    return result;
+            //}
 
             //string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("sppersonCrud", con);
                 cmd.CommandType = CommandType.StoredProcedure;
