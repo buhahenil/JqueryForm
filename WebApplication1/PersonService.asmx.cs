@@ -142,7 +142,8 @@ namespace WebApplication1
             if (person.Pincode.Length<6) 
             {
                 result.success = false;
-                result.error = "Enetr only 6 Digit";
+                result.error = "Enetr only 6 Digit";3
+                return result;
             }
 
 
