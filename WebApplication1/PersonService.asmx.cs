@@ -291,7 +291,12 @@ namespace WebApplication1
                     ParameterName = "@Hobbies",
                     Value = person.Hobbies
                 });
-
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@TermsAndConditions",
+                    Value = person.TermsAndConditions
+                });
+                
                 con.Open();
                 int resultQuery = cmd.ExecuteNonQuery();
                 con.Close();

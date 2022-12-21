@@ -168,7 +168,7 @@
             person.PinCode = $("#txtPinCode").val();
             person.birthday = $("#txtbirthday").val();
             person.Gender = $("input[type='radio']:checked").val();
-
+            person.TermsAndConditions = $("#chkIsTermsAccept").val();
             var arr = [];
             $("input:checkbox[class=ads_Checkbox]:checked").each(function () {
                 arr.push($(this).val());
