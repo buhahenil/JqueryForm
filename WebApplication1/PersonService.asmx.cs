@@ -139,6 +139,7 @@ namespace WebApplication1
                 result.error = "Select Country.";
                 return result;
             }
+
             // State.....
             if (person.State == "0")
             {
@@ -179,18 +180,23 @@ namespace WebApplication1
 
 
             // date of brithday
-            if (string.IsNullOrWhiteSpace(person.birthday))
+            if (string.IsNullOrEmpty(person.birthday))
             {
-            //    string today = DateTime.Today.ToString("MM/dd/yyyy");
-            //    string age = today.Year - birthday.Year;
-            //    if (birthday.Date > today.AddYears(-age)) age--;
-            //    {
-                    result.success = false;
-                    result.error = "Date Of Brith should be required.";
-                    return result;
-            //    }
+                result.success = false;
+                result.error = "Date Of Brith should be required.";
+                return result;
             }
-
+            else if (person.birthday <= "18") 
+            { 
+                var today = DateTime.Today;
+                var age = today.Year - Convert.ToDateTime(birthday).Year;
+                if (Convert.ToDateTime(birthday).Date > today.AddYears(-age)) age--;
+                {
+                    result.success = false;
+                    result.error = "Age should be more than 18.";
+                    return result;
+                }
+            }
             // Gender
             if (string.IsNullOrEmpty(person.Gender))
             {
