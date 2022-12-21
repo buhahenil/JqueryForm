@@ -205,24 +205,24 @@ namespace WebApplication1
             }
 
             // Hobbies
-            //if (string.IsNullOrEmpty(person.Hobbies))
-            //{
-            //    int selectedCnt = 0;
-            //    for (int i = 0; i <person.Hobbies.Items.Count; i++)
-            //    {
-            //        if (person.Hobbies.Items[i].Selected)
-            //        {
-            //            selectedCnt++;
-            //        }
-            //    }
+            if (string.IsNullOrEmpty(person.Hobbies))
+            {
+                int selectedCnt = 0;
+                for (int i = 0; i < person.Hobbies.Length; i++)
+                {
+                    if (person.Hobbies[i].)
+                    {
+                        selectedCnt++;
+                    }
+                }
 
-            //    if (selectedCnt < 3)
-            //    {
-            //        result.success = false;
-            //        result.error = "Minimun 3 Selected";
-            //        return result;
-            //    }
-            //}
+                if (selectedCnt < 3)
+                {
+                    result.success = false;
+                    result.error = "Minimun 3 Selected";
+                    return result;
+                }
+            }
 
 
             //string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
