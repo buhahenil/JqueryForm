@@ -81,6 +81,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ads_Checkbox.cs" />
     <Compile Include="Classes\City.cs" />
     <Compile Include="Classes\Country.cs" />
     <Compile Include="Classes\Result.cs" />

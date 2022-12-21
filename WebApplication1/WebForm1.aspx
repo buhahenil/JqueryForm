@@ -168,19 +168,13 @@
             person.PinCode = $("#txtPinCode").val();
             person.birthday = $("#txtbirthday").val();
             person.Gender = $("input[type='radio']:checked").val();
-            //person.Hobbies = $("input[type='checkbox']:checked").val();
 
-            var val = [];
-            $(':checkbox:checked').each(function (i) {
-                val[i] = $(this).val();
+            var arr = [];
+            $("input:checkbox[class=ads_Checkbox]:checked").each(function () {
+                arr.push($(this).val());
             });
-
-            //$.each($("input[type='checkbox']:checked"), function () {
-            //    arr.push($(this).val());
-            //});
-            //person.Hobbies = arr;
+            person.Hobbies = arr.toString();
             //debugger;
-            
 
             var values = {};
             values.per = JSON.stringify(person);
@@ -307,6 +301,6 @@
         $("#" + idDrop + "").empty();
         $("#" + idDrop + "").append($("<option></option>").val('0').html('--Select ' + name + '--'));
     }
-    
+
 </script>
 </html>
