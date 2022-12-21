@@ -147,7 +147,7 @@ namespace WebApplication1
                 result.error = "Select State.";
                 return result;
             }
-            
+
             // City........
             if (person.City == "0")
             {
@@ -155,7 +155,7 @@ namespace WebApplication1
                 result.error = "City State.";
                 return result;
             }
-            
+
             //Pin Code
             if (string.IsNullOrWhiteSpace(person.Pincode))
             {
@@ -186,17 +186,16 @@ namespace WebApplication1
                 result.error = "Date Of Brith should be required.";
                 return result;
             }
-            else if (person.birthday <= "18") 
-            { 
-                var today = DateTime.Today;
-                var age = today.Year - Convert.ToDateTime(birthday).Year;
-                if (Convert.ToDateTime(birthday).Date > today.AddYears(-age)) age--;
-                {
-                    result.success = false;
-                    result.error = "Age should be more than 18.";
-                    return result;
-                }
+            var today = DateTime.Today;
+            var age = today.Year - Convert.ToDateTime(person.birthday).Year;
+            if (Convert.ToDateTime(person.birthday).Date > today.AddYears(-age)) age--;
+            if (age < 18 || age > 200)
+            {
+                result.success = false;
+                result.error = "Age should be more than 18.";
+                return result;
             }
+           
             // Gender
             if (string.IsNullOrEmpty(person.Gender))
             {
