@@ -195,7 +195,7 @@ namespace WebApplication1
                 result.error = "Age should be more than 18.";
                 return result;
             }
-           
+
             // Gender
             if (string.IsNullOrEmpty(person.Gender))
             {
@@ -207,23 +207,16 @@ namespace WebApplication1
             // Hobbies
             if (string.IsNullOrEmpty(person.Hobbies))
             {
-                int selectedCnt = 0;
-                for (int i = 0; i < person.Hobbies.Length; i++)
-                {
-                    if (person.Hobbies[i].)
-                    {
-                        selectedCnt++;
-                    }
-                }
-
-                if (selectedCnt < 3)
-                {
-                    result.success = false;
-                    result.error = "Minimun 3 Selected";
-                    return result;
-                }
+                result.success = false;
+                result.error = "Hobbies should be required.";
+                return result;
             }
-
+            if (person.Hobbies.Split(',').Length < 3)
+            {
+                result.success = false;
+                result.error = "Minimun 3 Selected";
+                return result;
+            }
 
             //string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -296,7 +289,7 @@ namespace WebApplication1
                     ParameterName = "@TermsAndConditions",
                     Value = person.TermsAndConditions
                 });
-                
+
                 con.Open();
                 int resultQuery = cmd.ExecuteNonQuery();
                 con.Close();
@@ -305,7 +298,6 @@ namespace WebApplication1
                 {
                     result.success = true;
                 }
-
                 return result;
             }
 

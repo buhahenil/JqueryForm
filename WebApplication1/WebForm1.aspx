@@ -139,14 +139,13 @@
 
             <tr>
                 <td colspan="2">
-
-                    <input id="chkIsTermsAccept" type="checkbox" name="chkIsTermsAccept" />
+                    <input type="checkbox" id="chkIsTermsAccept" name="chkIsTermsAccept" value="0"/>
                     <label for="chkIsTermsAccept">I Agree with this from</label>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center; align-items: center; align-content: center; align-self: center;">
-                    <input type="button" name="Submit" value="Sumbit" id="btnSubmit" style="height: 26px" />
+                    <input type="button" name="Submit" value="Sumbit" id="btnSubmit" disabled="disabled" style="height: 26px" />
                 </td>
             </tr>
         </table>
@@ -168,12 +167,15 @@
             person.PinCode = $("#txtPinCode").val();
             person.birthday = $("#txtbirthday").val();
             person.Gender = $("input[type='radio']:checked").val();
-            person.TermsAndConditions = $("#chkIsTermsAccept").val();
+
             var arr = [];
             $("input:checkbox[class=ads_Checkbox]:checked").each(function () {
                 arr.push($(this).val());
             });
             person.Hobbies = arr.toString();
+
+            person.TermsAndConditions = $("#chkIsTermsAccept").val();
+            
             //debugger;
 
             var values = {};
@@ -288,6 +290,13 @@
             }
             else {
                 disableDropDown('ddlCity', 'City');
+            }
+        });
+        $('#chkIsTermsAccept').click(function () {
+            if ($('#btnSubmit').is(':disabled')) {
+                $('#btnSubmit').removeAttr('disabled');
+            } else {
+                $('#btnSubmit').attr('disabled', 'disabled');
             }
         });
     });
