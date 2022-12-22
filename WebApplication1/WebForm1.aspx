@@ -177,7 +177,7 @@
             person.TermsAndConditions = $("#chkIsTermsAccept").val();
             
             //debugger;
-
+            
             var values = {};
             values.per = JSON.stringify(person);
             $.ajax({
@@ -187,17 +187,20 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
+                    
                     if (data.d != null && !data.d.success && data.d.error != null) {
                         alert(data.d.error);
                     }
                     //debugger;
                     console.log(data);
+                    
                 },
                 error: function (err) {
                     //debugger;
                     console.log(err);
                 }
             });
+            
         });
 
         // Country Dropdouwn list 
@@ -310,6 +313,9 @@
         $("#" + idDrop + "").empty();
         $("#" + idDrop + "").append($("<option></option>").val('0').html('--Select ' + name + '--'));
     }
+    //function resetForm() {
+    //    $('#btnSubmit')[0].reset();
+    //}
 
 </script>
 </html>

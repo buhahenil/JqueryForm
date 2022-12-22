@@ -96,7 +96,7 @@ namespace WebApplication1
                 return result;
             }
 
-            // Moblie Number 
+            //--------------- Moblie Number ----------------
             if (string.IsNullOrWhiteSpace(person.Mobile))
             {
                 result.success = false;
@@ -118,7 +118,22 @@ namespace WebApplication1
                 return result;
             }
 
-            // Address.....
+            SqlConnection conMoblie = new SqlConnection(connectionString);
+            SqlCommand cmdMoblie = new SqlCommand("sppersonSelectedbyMobile", conMoblie);
+            conMoblie.Open();
+            SqlDataAdapter sda = new SqlDataAdapter(cmdMoblie);
+            cmdMoblie.CommandType = CommandType.StoredProcedure;
+            DataTable dt = new DataTable();
+            cmdMoblie.Parameters.AddWithValue("@MoblieNumber",person.Mobile);
+            sda.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                result.success = false;
+                result.error = "Enter the Different Moblie Number.";
+                return result;
+            }
+
+            //---------- Address ---------
             if (string.IsNullOrWhiteSpace(person.Address))
             {
                 result.success = false;
@@ -132,7 +147,7 @@ namespace WebApplication1
                 return result;
             }
 
-            // Country......
+            //----------- Country ---------
             if (person.Country == "0")
             {
                 result.success = false;
@@ -140,7 +155,7 @@ namespace WebApplication1
                 return result;
             }
 
-            // State.....
+            //--------- State----------
             if (person.State == "0")
             {
                 result.success = false;
@@ -148,7 +163,7 @@ namespace WebApplication1
                 return result;
             }
 
-            // City........
+            //--------- City----------
             if (person.City == "0")
             {
                 result.success = false;
@@ -156,7 +171,7 @@ namespace WebApplication1
                 return result;
             }
 
-            //Pin Code
+            //---------- Pin Code --------
             if (string.IsNullOrWhiteSpace(person.Pincode))
             {
                 result.success = false;
@@ -179,7 +194,7 @@ namespace WebApplication1
             //}
 
 
-            // date of brithday
+            //---------- date of brithday -------------
             if (string.IsNullOrEmpty(person.birthday))
             {
                 result.success = false;
@@ -196,7 +211,7 @@ namespace WebApplication1
                 return result;
             }
 
-            // Gender
+            //----------- Gender ---------
             if (string.IsNullOrEmpty(person.Gender))
             {
                 result.success = false;
@@ -204,7 +219,7 @@ namespace WebApplication1
                 return result;
             }
 
-            // Hobbies
+            //------------ Hobbies ------------
             if (string.IsNullOrEmpty(person.Hobbies))
             {
                 result.success = false;
@@ -214,7 +229,7 @@ namespace WebApplication1
             if (person.Hobbies.Split(',').Length < 3)
             {
                 result.success = false;
-                result.error = "Minimun 3 Selected";
+                result.error = "Minimun 3 Selected Hobbies";
                 return result;
             }
 
@@ -289,7 +304,11 @@ namespace WebApplication1
                     ParameterName = "@TermsAndConditions",
                     Value = person.TermsAndConditions
                 });
-
+                cmd.Parameters.Add(new SqlParameter()
+                {
+                    ParameterName = "@DMLFlag",
+                    Value = "I"
+                });
                 con.Open();
                 int resultQuery = cmd.ExecuteNonQuery();
                 con.Close();
