@@ -139,7 +139,7 @@
 
             <tr>
                 <td colspan="2">
-                    <input type="checkbox" id="chkIsTermsAccept" name="chkIsTermsAccept" value="0"/>
+                    <input type="checkbox" id="chkIsTermsAccept" name="chkIsTermsAccept" value="1"/>
                     <label for="chkIsTermsAccept">I Agree with this from</label>
                 </td>
             </tr>
@@ -187,13 +187,27 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                    
                     if (data.d != null && !data.d.success && data.d.error != null) {
                         alert(data.d.error);
                     }
                     //debugger;
                     console.log(data);
-                    
+                    $("#btnSubmit").click(function () {
+                        $("#txtFirstName").val('');
+                        $("#txtMiddleName").val('');
+                        $("#txtLastName").val('');
+                        $("#txtMobile").val('');
+                        $("#txtAddress").val('');
+                        $('#ddlCountry').prop('selectedIndex', 0).removeAttr('disabled', true);
+                        $('#ddlState').prop('selectedIndex', 0).removeAttr('disabled', true);
+                        $("#txtPinCode").val('');
+                        $("#txtDate").val('');
+                        $("input[type='radio']:checked").prop('checked', false);
+                        $("input:checkbox[class=ads_Checkbox]:checked").each(function () {
+                            $(this).prop('checked', false);
+                        });
+                        
+                    });
                 },
                 error: function (err) {
                     //debugger;
@@ -221,7 +235,6 @@
                 console.log(err);
             }
         });
-
 
         // State Dropdouwn list
         $("#ddlCountry").change(function () {
@@ -295,6 +308,8 @@
                 disableDropDown('ddlCity', 'City');
             }
         });
+
+        /* disable button */
         $('#chkIsTermsAccept').click(function () {
             if ($('#btnSubmit').is(':disabled')) {
                 $('#btnSubmit').removeAttr('disabled');
@@ -313,9 +328,6 @@
         $("#" + idDrop + "").empty();
         $("#" + idDrop + "").append($("<option></option>").val('0').html('--Select ' + name + '--'));
     }
-    //function resetForm() {
-    //    $('#btnSubmit')[0].reset();
-    //}
 
 </script>
 </html>
