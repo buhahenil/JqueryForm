@@ -200,13 +200,14 @@
                         $("#txtAddress").val('');
                         $('#ddlCountry').prop('selectedIndex', 0).removeAttr('disabled', true);
                         $('#ddlState').prop('selectedIndex', 0).removeAttr('disabled', true);
+                        $('#ddlCity').prop('selectedIndex', 0).removeAttr('disabled', true);
                         $("#txtPinCode").val('');
-                        $("#txtDate").val('');
+                        $("#txtbirthday").val('');
                         $("input[type='radio']:checked").prop('checked', false);
                         $("input:checkbox[class=ads_Checkbox]:checked").each(function () {
                             $(this).prop('checked', false);
                         });
-                        
+                        $("#chkIsTermsAccept").prop('checked', false);
                     });
                 },
                 error: function (err) {
