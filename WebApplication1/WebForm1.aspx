@@ -189,26 +189,11 @@
                 success: function (data) {
                     if (data.d != null && !data.d.success && data.d.error != null) {
                         alert(data.d.error);
+                    }else{
+                        formReset();
                     }
                     //debugger;
                     console.log(data);
-                    $("#btnSubmit").click(function () {
-                        $("#txtFirstName").val('');
-                        $("#txtMiddleName").val('');
-                        $("#txtLastName").val('');
-                        $("#txtMobile").val('');
-                        $("#txtAddress").val('');
-                        $('#ddlCountry').prop('selectedIndex', 0).removeAttr('disabled', true);
-                        $('#ddlState').prop('selectedIndex', 0).removeAttr('disabled', true);
-                        $('#ddlCity').prop('selectedIndex', 0).removeAttr('disabled', true);
-                        $("#txtPinCode").val('');
-                        $("#txtbirthday").val('');
-                        $("input[type='radio']:checked").prop('checked', false);
-                        $("input:checkbox[class=ads_Checkbox]:checked").each(function () {
-                            $(this).prop('checked', false);
-                        });
-                        $("#chkIsTermsAccept").prop('checked', false);
-                    });
                 },
                 error: function (err) {
                     //debugger;
@@ -314,8 +299,9 @@
         $('#chkIsTermsAccept').click(function () {
             if ($('#btnSubmit').is(':disabled')) {
                 $('#btnSubmit').removeAttr('disabled');
-            } else {
-                $('#btnSubmit').attr('disabled', 'disabled');
+            }
+            else {
+                $('#btnSubmit').attr('disabled', 'disabled').removeAttr('disabled', true);;
             }
         });
     });
@@ -330,5 +316,22 @@
         $("#" + idDrop + "").append($("<option></option>").val('0').html('--Select ' + name + '--'));
     }
 
+    function formReset() {
+        $("#txtFirstName").val('');
+        $("#txtMiddleName").val('');
+        $("#txtLastName").val('');
+        $("#txtMobile").val('');
+        $("#txtAddress").val('');
+        $('#ddlCountry').prop('selectedIndex', 0).removeAttr('disabled', true);
+        $('#ddlState').prop('selectedIndex', 0).removeAttr('disabled', true);
+        $('#ddlCity').prop('selectedIndex', 0).removeAttr('disabled', true);
+        $("#txtPinCode").val('');
+        $("#txtbirthday").val('');
+        $("input[type='radio']:checked").prop('checked', false);
+        $("input:checkbox[class=ads_Checkbox]:checked").each(function () {
+            $(this).prop('checked', false);
+        });
+        $("#chkIsTermsAccept").prop('checked', false).removeAttr('disabled', true);
+    }
 </script>
 </html>
