@@ -325,9 +325,14 @@
         $("#txtLastName").val('');
         $("#txtMobile").val('');
         $("#txtAddress").val('');
-        $("#ddlCountry").prop('selectedIndex', 0).removeAttr('disabled', true);s
+        //dropdown list 
+        $("#ddlCountry").prop('selectedIndex', 0).removeAttr('disabled', true);
         $("#ddlState").prop('selectedIndex', 0).removeAttr('disabled', true);
         $("#ddlCity").prop('selectedIndex', 0).removeAttr('disabled', true);
+        $('#ddlCountry').change(ddlState);
+        $('#ddlState').change(ddlCity).prop('disabled', true);
+        $('#ddlCity').prop('disabled', true);
+        
         $("#txtPinCode").val('');
         $("#txtbirthday").val('');
         $("input[type='radio']:checked").prop('checked', false);
