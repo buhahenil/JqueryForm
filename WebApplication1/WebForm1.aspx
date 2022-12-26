@@ -139,7 +139,7 @@
 
             <tr>
                 <td colspan="2">
-                    <input type="checkbox" id="chkIsTermsAccept" name="chkIsTermsAccept" value="1"/>
+                    <input type="checkbox" id="chkIsTermsAccept" name="chkIsTermsAccept" value="1" />
                     <label for="chkIsTermsAccept">I Agree with this from</label>
                 </td>
             </tr>
@@ -175,9 +175,9 @@
             person.Hobbies = arr.toString();
 
             person.TermsAndConditions = $("#chkIsTermsAccept").val();
-            
+
             //debugger;
-            
+
             var values = {};
             values.per = JSON.stringify(person);
             $.ajax({
@@ -189,7 +189,7 @@
                 success: function (data) {
                     if (data.d != null && !data.d.success && data.d.error != null) {
                         alert(data.d.error);
-                    }else{
+                    } else {
                         formReset();
                     }
                     //debugger;
@@ -200,7 +200,7 @@
                     console.log(err);
                 }
             });
-            
+
         });
 
         // Country Dropdouwn list 
@@ -295,13 +295,16 @@
             }
         });
 
-        /* disable button */
+
+
+    });
+    /* disable button */
+    $(function () {
         $('#chkIsTermsAccept').click(function () {
-            if ($('#btnSubmit').is(':disabled')) {
+            if ($(this).is(':checked')) {
                 $('#btnSubmit').removeAttr('disabled');
-            }
-            else {
-                $('#btnSubmit').attr('disabled', 'disabled').removeAttr('disabled', true);;
+            } else {
+                $('#btnSubmit').attr('disabled', 'disabled');
             }
         });
     });
@@ -322,9 +325,9 @@
         $("#txtLastName").val('');
         $("#txtMobile").val('');
         $("#txtAddress").val('');
-        $('#ddlCountry').prop('selectedIndex', 0).removeAttr('disabled', true);
-        $('#ddlState').prop('selectedIndex', 0).removeAttr('disabled', true);
-        $('#ddlCity').prop('selectedIndex', 0).removeAttr('disabled', true);
+        $("#ddlCountry").prop('selectedIndex', 0).removeAttr('disabled', true);s
+        $("#ddlState").prop('selectedIndex', 0).removeAttr('disabled', true);
+        $("#ddlCity").prop('selectedIndex', 0).removeAttr('disabled', true);
         $("#txtPinCode").val('');
         $("#txtbirthday").val('');
         $("input[type='radio']:checked").prop('checked', false);
@@ -332,6 +335,8 @@
             $(this).prop('checked', false);
         });
         $("#chkIsTermsAccept").prop('checked', false).removeAttr('disabled', true);
+        $('#btnSubmit').attr('disabled', 'disabled');
+
     }
 </script>
 </html>
