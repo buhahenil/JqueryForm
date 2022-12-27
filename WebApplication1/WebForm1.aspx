@@ -327,24 +327,25 @@
             success: function (data) {
                 $("#tblGridview").person({
                     data: data,
-                    columns: [
+                    columns:
                         (data[0].Pid),
-                        { 'data': 'FirstName'},
-                        { 'data': 'MiddleName'},
-                        { 'data': 'LastName'},
-                        { 'data': 'Mobile'},
-                        { 'data': 'Address'},
-                        { 'data': 'Country'},
-                        { 'data': 'State'},
-                        { 'data': 'City'},
-                        { 'data': 'PinCode'},
-                        { 'data': 'birthday'},
-                        { 'data': 'Gender'},
-                        { 'data': 'Hobbies'},
-                        { 'data': 'TermsAndConditions'}
-                    ]
-                })
-                //console.log(data);
+                        (data[1].FirstName),
+                    (data[2].MiddleName),
+                    (data[3].LastName),
+                    (data[4].Mobile),
+                    (data[5].Address),
+                    (data[6].Country),
+                    (data[7].State),
+                    (data[8].City),
+                    (data[9].PinCode),
+                    (data[10].birthday),
+                    (data[11].Gender),
+                    (data[12].Hobbies),
+                    (data[13].TermsAndConditions)
+                )
+                });
+
+        //console.log(data);
                 //console.log(data[0].Pid);
                 //console.log(data[0]["Pid"]);
 
