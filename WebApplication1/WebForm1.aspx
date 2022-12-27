@@ -10,29 +10,31 @@
 <body>
     <form id="form1" runat="server">
         <table border="2" id="tblGridview">
-           <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Last Name</th>
-                <th>Mobile Number</th>
-                <th>Address</th>
-                <th>Country</th>
-                <th>State</th>
-                <th>City</th>
-                <th>Pin Code</th>
-                <th>Date Of Brith</th>
-                <th>Gender</th>
-                <th>Hobbies</th>
-                <th>TermsAndConditions</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-           </thead>
+            <thead>
+                <tr>
+                    <th>PRID</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>Mobile Number</th>
+                    <th>Address</th>
+                    <th>Country</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Pin Code</th>
+                    <th>Date Of Brith</th>
+                    <th>Gender</th>
+                    <th>Hobbies</th>
+                    <th>TermsAndConditions</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
             <tbody>
-
             </tbody>
-        </table><br/><br/>
+        </table>
+        <br />
+        <br />
         <input type="button" id="btnAddnew" value="Add New" />
         <table border="2">
             <tr>
@@ -197,7 +199,6 @@
                 arr.push($(this).val());
             });
             person.Hobbies = arr.toString();
-
             person.TermsAndConditions = $("#chkIsTermsAccept").val();
 
             //debugger;
@@ -318,6 +319,37 @@
             }
         });
 
+        // data table 
+        $.ajax({
+            type: "POST",
+            url: "/PersonService.asmx/DataDisplay",
+            dataType: "json",
+            success: function (data) {
+                $("#tblGridview").person({
+                    data: data,
+                    columns: [
+                        (data[0].Pid),
+                        { 'data': 'FirstName'},
+                        { 'data': 'MiddleName'},
+                        { 'data': 'LastName'},
+                        { 'data': 'Mobile'},
+                        { 'data': 'Address'},
+                        { 'data': 'Country'},
+                        { 'data': 'State'},
+                        { 'data': 'City'},
+                        { 'data': 'PinCode'},
+                        { 'data': 'birthday'},
+                        { 'data': 'Gender'},
+                        { 'data': 'Hobbies'},
+                        { 'data': 'TermsAndConditions'}
+                    ]
+                })
+                //console.log(data);
+                //console.log(data[0].Pid);
+                //console.log(data[0]["Pid"]);
+
+            }
+        });
     });
     /* disable button */
     $(function () {
@@ -353,7 +385,7 @@
         $('#ddlCountry').change(ddlState);
         $('#ddlState').change(ddlCity).prop('disabled', true);
         $('#ddlCity').prop('disabled', true);
-        
+
         $("#txtPinCode").val('');
         $("#txtbirthday").val('');
         $("input[type='radio']:checked").prop('checked', false);
@@ -367,9 +399,9 @@
 
     function addRow() {
         var table = document.getElementById("tblGridview"); //get the table
-        var rowcount = table.rows.length; //get no. of rows in the table      
+        var Data = table.rows.length; //get no. of rows in the table
         //append the controls in the row      
-        var tblRow = "<tr>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>             </tr>";
+        var tblRow = "<tr>   <td>' + Data[0].Pid + '</td>               <td>' + DataDisplay() + '</td>                 <td>' + DataDisplay() + '</td>                 <td>' + DataDisplay() + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>             </tr>";
 
         //append the row to the table.
         $("#tblGridview").append(tblRow);
@@ -394,6 +426,6 @@
     //    var tblRow = ''
     //    $("#tbl").append(tblRow);
     //}
-    
+
 </script>
 </html>

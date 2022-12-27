@@ -11,6 +11,7 @@ using System.Web.Services;
 using System.Web.UI.WebControls;
 using WebApplication1.Classes;
 using System.Text.RegularExpressions;
+using System.Web.Script.Serialization;
 
 namespace WebApplication1
 {
@@ -27,7 +28,7 @@ namespace WebApplication1
     {
         public string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
         private object birthday;
-        
+
 
         [WebMethod]
         public Result AddPerson(string per)
@@ -125,7 +126,7 @@ namespace WebApplication1
             SqlDataAdapter sda = new SqlDataAdapter(cmdMoblie);
             cmdMoblie.CommandType = CommandType.StoredProcedure;
             DataTable dt = new DataTable();
-            cmdMoblie.Parameters.AddWithValue("@MoblieNumber",person.Mobile);
+            cmdMoblie.Parameters.AddWithValue("@MoblieNumber", person.Mobile);
             sda.Fill(dt);
             if (dt.Rows.Count > 0)
             {
@@ -343,7 +344,7 @@ namespace WebApplication1
             return lst;
 
         }
-        
+
         //State Dropdown
         [WebMethod]
         [ScriptMethod]
@@ -365,7 +366,7 @@ namespace WebApplication1
             }
             return lst;
         }
-        
+
         //City Dropdown 
         [WebMethod]
         [ScriptMethod]
@@ -390,7 +391,7 @@ namespace WebApplication1
         //data gridview 
         [WebMethod]
         [ScriptMethod]
-        public void DataDisplay(string dataDisplay)
+        public void DataDisplay()
         {
             SqlConnection con = new SqlConnection(connectionString);
             string select = "sppersonSelected";
@@ -399,13 +400,10 @@ namespace WebApplication1
             DataTable dt = new DataTable();
             con.Open();
             sda.Fill(dt);
-            grvDataDisplay.DataSource = dt;
-            grvDataDisplay.DataBind();
             con.Close();
+            //Serialize table 
+            Context.Response.Write(JsonConvert.SerializeObject(dt));
         }
-        public string grvDataDisplay_RowEditing(string per) 
-        {
-            grvDataDispl
-        }
+
     }
 }
