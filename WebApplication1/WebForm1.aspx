@@ -330,28 +330,30 @@
                     columns:
                         (data[0].Pid),
                         (data[1].FirstName),
-                    (data[2].MiddleName),
-                    (data[3].LastName),
-                    (data[4].Mobile),
-                    (data[5].Address),
-                    (data[6].Country),
-                    (data[7].State),
-                    (data[8].City),
-                    (data[9].PinCode),
-                    (data[10].birthday),
-                    (data[11].Gender),
-                    (data[12].Hobbies),
-                    (data[13].TermsAndConditions)
+                        (data[2].MiddleName),
+                        (data[3].LastName),
+                        (data[4].Mobile),
+                        (data[5].Address),
+                        (data[6].Country),
+                        (data[7].State),
+                        (data[8].City),
+                        (data[9].PinCode),
+                        (data[10].birthday),
+                        (data[11].Gender),
+                        (data[12].Hobbies),
+                    (data[13].TermsAndConditions),
+                    var data = "<tr>   <td>' + Data[0].Pid + '</td>   <td>' + DataDisplay() + '</td>  <td>' + DataDisplay() + '</td>     <td>' + DataDisplay() + '</td>     <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>     <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>   <td>' + DataDisplay + '</td>   <td>' + DataDisplay + '</td>   <td>' + DataDisplay + '</td>  
                 )
-                });
+            };
 
-        //console.log(data);
+                //console.log(data);
                 //console.log(data[0].Pid);
                 //console.log(data[0]["Pid"]);
-
+                //$("#tblGridview").append(tblRow);
             }
         });
     });
+
     /* disable button */
     $(function () {
         $('#chkIsTermsAccept').click(function () {
@@ -396,16 +398,6 @@
         $("#chkIsTermsAccept").prop('checked', false).removeAttr('disabled', true);
         $('#btnSubmit').attr('disabled', 'disabled');
 
-    }
-
-    function addRow() {
-        var table = document.getElementById("tblGridview"); //get the table
-        var Data = table.rows.length; //get no. of rows in the table
-        //append the controls in the row      
-        var tblRow = "<tr>   <td>' + Data[0].Pid + '</td>               <td>' + DataDisplay() + '</td>                 <td>' + DataDisplay() + '</td>                 <td>' + DataDisplay() + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>                 <td>' + DataDisplay + '</td>             </tr>";
-
-        //append the row to the table.
-        $("#tblGridview").append(tblRow);
     }
 
     //function SaveTicket() {
