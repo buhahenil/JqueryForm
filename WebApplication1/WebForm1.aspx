@@ -326,31 +326,31 @@
             dataType: "json",
             success: function (data) {
                 $("#tblGridview").person({
-                    data: data,
-                    columns:
-                        (data[0].Pid),
-                        (data[1].FirstName),
-                        (data[2].MiddleName),
-                        (data[3].LastName),
-                        (data[4].Mobile),
-                        (data[5].Address),
-                        (data[6].Country),
-                        (data[7].State),
-                        (data[8].City),
-                        (data[9].PinCode),
-                        (data[10].birthday),
-                        (data[11].Gender),
-                        (data[12].Hobbies),
-                    (data[13].TermsAndConditions),
-                    var data = "<tr>   <td>' + Data[0].Pid + '</td>   <td>' + DataDisplay() + '</td>  <td>' + DataDisplay() + '</td>     <td>' + DataDisplay() + '</td>     <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>     <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>   <td>' + DataDisplay + '</td>   <td>' + DataDisplay + '</td>   <td>' + DataDisplay + '</td>  
-                )
-            };
+                    data: data[];
+                    for(int i = 0; i < data.length; i++){
+                        data = "<tr>   <td>' + Data[0].Pid + '</td>   <td>' + DataDisplay() + '</td>  <td>' + DataDisplay() + '</td>     <td>' + DataDisplay() + '</td>     <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>     <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>   <td>' + DataDisplay + '</td>   <td>' + DataDisplay + '</td>   <td>' + DataDisplay + '</td>  
+                    }
 
+                )},
                 //console.log(data);
                 //console.log(data[0].Pid);
                 //console.log(data[0]["Pid"]);
                 //$("#tblGridview").append(tblRow);
-            }
+            //columns:
+            //    (data[0].Pid),
+            //            (data[1].FirstName),
+            //(data[2].MiddleName),
+            //(data[3].LastName),
+            //(data[4].Mobile),
+            //(data[5].Address),
+            //(data[6].Country),
+            //(data[7].State),
+            //(data[8].City),
+            //(data[9].PinCode),
+            //(data[10].birthday),
+            //(data[11].Gender),
+            //(data[12].Hobbies),
+            //(data[13].TermsAndConditions),
         });
     });
 
