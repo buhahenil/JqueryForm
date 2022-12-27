@@ -228,7 +228,6 @@
         });
 
         // Country Dropdouwn list 
-
         $.ajax({
             type: "POST",
             url: "/PersonService.asmx/GetCountries",
@@ -366,26 +365,35 @@
 
     }
 
-    function addRow(#btnSubmit) {
-        var FirstName = $("#txtFirstName" + id).val();
-        var MiddleName = $("#txtMiddleName" + id).val();
-        var LastName = $("#txtLastName" + id).val();
-        var Mobile = $("#txtMobile" + id).val();
-        var Address = $("#txtAddress" + id).val();
-        var Country = $("#ddlCountry" + id).val();
-        var State = $("#ddlState" + id).val();
-        var City = $("#ddlCity" + id).val();
-        var PinCode = $("#txtPinCode" + id).val();
-        var birthday = $("#txtbirthday" + id).val();
-        var Gender = $("input[type='radio']:checked" + id).val();
-        var TermsAndConditions = $("#chkIsTermsAccept" + id).val();
+    function addRow() {
+        var table = document.getElementById("tblGridview"); //get the table
+        var rowcount = table.rows.length; //get no. of rows in the table      
+        //append the controls in the row      
+        var tblRow = "<tr>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>                 <th>' + rowcount + '</th>             </tr>";
 
-        //remove current selected row
-        $("#row" + id).remove();
-        //append new row      
-        var tblRow = ''
-        $("#tbl").append(tblRow);
+        //append the row to the table.
+        $("#tblGridview").append(tblRow);
     }
+
+    //function SaveTicket() {
+    //    var FirstName = $("#txtFirstName" + id).val();
+    //    var MiddleName = $("#txtMiddleName" + id).val();
+    //    var LastName = $("#txtLastName" + id).val();
+    //    var Mobile = $("#txtMobile" + id).val();
+    //    var Address = $("#txtAddress" + id).val();
+    //    var Country = $("#ddlCountry" + id).val();
+    //    var State = $("#ddlState" + id).val();
+    //    var City = $("#ddlCity" + id).val();
+    //    var PinCode = $("#txtPinCode" + id).val();
+    //    var birthday = $("#txtbirthday" + id).val();
+    //    var Gender = $("input[type='radio']:checked" + id).val();
+    //    var TermsAndConditions = $("#chkIsTermsAccept" + id).val();
+    //    //remove current selected row
+    //    $("#row" + id).remove();
+    //    //append new row      
+    //    var tblRow = ''
+    //    $("#tbl").append(tblRow);
+    //}
     
 </script>
 </html>

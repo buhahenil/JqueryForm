@@ -27,6 +27,7 @@ namespace WebApplication1
     {
         public string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
         private object birthday;
+        
 
         [WebMethod]
         public Result AddPerson(string per)
@@ -386,7 +387,7 @@ namespace WebApplication1
             return lst;
         }
 
-        //
+        //data gridview 
         [WebMethod]
         [ScriptMethod]
         public void DataDisplay(string dataDisplay)
@@ -401,6 +402,10 @@ namespace WebApplication1
             grvDataDisplay.DataSource = dt;
             grvDataDisplay.DataBind();
             con.Close();
+        }
+        public string grvDataDisplay_RowEditing(string per) 
+        {
+            grvDataDispl
         }
     }
 }
