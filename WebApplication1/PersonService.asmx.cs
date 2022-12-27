@@ -322,7 +322,7 @@ namespace WebApplication1
 
         }
 
-
+        //Country Dropdown 
         [WebMethod]
         [ScriptMethod]
         public List<Country> GetCountries()
@@ -342,6 +342,8 @@ namespace WebApplication1
             return lst;
 
         }
+        
+        //State Dropdown
         [WebMethod]
         [ScriptMethod]
         public List<State> GetState(string CounrtyId)
@@ -362,7 +364,8 @@ namespace WebApplication1
             }
             return lst;
         }
-
+        
+        //City Dropdown 
         [WebMethod]
         [ScriptMethod]
         public List<City> GetCity(String StateId)
@@ -381,6 +384,23 @@ namespace WebApplication1
                 lst.Add(new City() { CityId = Convert.ToInt32(dr["CityId"]), CityName = Convert.ToString(dr["CityName"]) });
             }
             return lst;
+        }
+
+        //
+        [WebMethod]
+        [ScriptMethod]
+        public void DataDisplay(string dataDisplay)
+        {
+            SqlConnection con = new SqlConnection(connectionString);
+            string select = "sppersonSelected";
+            SqlCommand cmd = new SqlCommand(select, con);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Open();
+            sda.Fill(dt);
+            grvDataDisplay.DataSource = dt;
+            grvDataDisplay.DataBind();
+            con.Close();
         }
     }
 }

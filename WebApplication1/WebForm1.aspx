@@ -9,6 +9,30 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <table border="2" id="tblGridview">
+           <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Mobile Number</th>
+                <th>Address</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Pin Code</th>
+                <th>Date Of Brith</th>
+                <th>Gender</th>
+                <th>Hobbies</th>
+                <th>TermsAndConditions</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+           </thead>
+            <tbody>
+
+            </tbody>
+        </table><br/><br/>
         <input type="button" id="btnAddnew" value="Add New" />
         <table border="2">
             <tr>
@@ -295,8 +319,6 @@
             }
         });
 
-
-
     });
     /* disable button */
     $(function () {
@@ -343,5 +365,27 @@
         $('#btnSubmit').attr('disabled', 'disabled');
 
     }
+
+    function addRow(#btnSubmit) {
+        var FirstName = $("#txtFirstName" + id).val();
+        var MiddleName = $("#txtMiddleName" + id).val();
+        var LastName = $("#txtLastName" + id).val();
+        var Mobile = $("#txtMobile" + id).val();
+        var Address = $("#txtAddress" + id).val();
+        var Country = $("#ddlCountry" + id).val();
+        var State = $("#ddlState" + id).val();
+        var City = $("#ddlCity" + id).val();
+        var PinCode = $("#txtPinCode" + id).val();
+        var birthday = $("#txtbirthday" + id).val();
+        var Gender = $("input[type='radio']:checked" + id).val();
+        var TermsAndConditions = $("#chkIsTermsAccept" + id).val();
+
+        //remove current selected row
+        $("#row" + id).remove();
+        //append new row      
+        var tblRow = ''
+        $("#tbl").append(tblRow);
+    }
+    
 </script>
 </html>
