@@ -12,6 +12,7 @@
         <table border="2" id="tblGridview">
             <thead>
                 <tr>
+                    <th>Pid</th>
                     <th>PRID</th>
                     <th>First Name</th>
                     <th>Middle Name</th>
@@ -319,19 +320,39 @@
             }
         });
 
+        // data on edit button 
+        $('body').on('click', '#btnEdit', function () {
+            var pid = $(this).parents("tr").find('td:eq(0)').text();
+            var prid = $(this).parents("tr").find('td:eq(1)').text();
+            var firstname = $(this).parents("tr").find('td:eq(2)').text();
+            var middlename = $(this).parents("tr").find('td:eq(3)').text();
+            var lastname = $(this).parents("tr").find('td:eq(4)').text();
+            var mobilenumber = $(this).parents("tr").find('td:eq(5)').text();
+            var address = $(this).parents("tr").find('td:eq(6)').text();
+            var country = $(this).parents("tr").find('td:eq(7)').text();
+            var state = $(this).parents("tr").find('td:eq(8)').text();
+            var city = $(this).parents("tr").find('td:eq(9)').text();
+            var pincode = $(this).parents("tr").find('td:eq(10)').text();
+            var dateofbrith = $(this).parents("tr").find('td:eq(11)').text();
+            var gender = $(this).parents("tr").find('td:eq(12)').text();
+            var hobbies = $(this).parents("tr").find('td:eq(13)').text();
+            var termsandconditions = $(this).parents("tr").find('td:eq(14)').text().toString();
+            
+            //debugger;
+
+        });
+
         // data table 
         $.ajax({
             type: "POST",
             url: "/PersonService.asmx/DataDisplay",
             dataType: "json",
             success: function (data) {
-                /*$("#tblGridview").person({*/
-                //data: data[];
-                console.log(data);
+                //console.log(data);
                 for (let i = 0; i < data.length; i++) {
-                    $("#tblGridview").append('<tr>   <td>' + data[i].Pid + '</td>   <td>' + data[i].FirstName + '</td>  <td>' + data[i].MiddleName + '</td>     <td>' + data[i].LastName + '</td>     <td>' + data[i].MoblieNumber + '</td>    <td>' + data[i].Address + '</td>    <td>' + data[i].Country + '</td>     <td>' + data[i].State + '</td>    <td>' + data[i].City + '</td>    <td>' + data[i].Pincode + '</td>   <td>' + data[i].DateOfBrith + '</td>   <td>' + data[i].Gender + '</td>   <td>' + data[i].Hobbies + '</td>  <td>' + data[i].TermsAndConditions + '</td> </tr>');
+                    $("#tblGridview").append('<tr>   <td>' + data[i].Pid + '</td>   <td>' + data[i].PRID + '</td>   <td>' + data[i].FirstName + '</td>  <td>' + data[i].MiddleName + '</td>     <td>' + data[i].LastName + '</td>     <td>' + data[i].MoblieNumber + '</td>    <td>' + data[i].Address + '</td>    <td>' + data[i].Country + '</td>     <td>' + data[i].State + '</td>    <td>' + data[i].City + '</td>    <td>' + data[i].Pincode + '</td>   <td>' + data[i].DateOfBrith + '</td>   <td>' + data[i].Gender + '</td>   <td>' + data[i].Hobbies + '</td>  <td>' + data[i].TermsAndConditions + '</td>    <td><input type="button" id="btnEdit" value="Edit"> </td><td><input type="button" id="btnDelete" value="Delete"> </td>  </tr>');
                 };
-                
+
             },
             error: function (err) {
                 console.log(err);
@@ -388,20 +409,7 @@
 
     }
 
-    //function SaveTicket() {
-    //    var FirstName = $("#txtFirstName" + id).val();
-    //    var MiddleName = $("#txtMiddleName" + id).val();
-    //    var LastName = $("#txtLastName" + id).val();
-    //    var Mobile = $("#txtMobile" + id).val();
-    //    var Address = $("#txtAddress" + id).val();
-    //    var Country = $("#ddlCountry" + id).val();
-    //    var State = $("#ddlState" + id).val();
-    //    var City = $("#ddlCity" + id).val();
-    //    var PinCode = $("#txtPinCode" + id).val();
-    //    var birthday = $("#txtbirthday" + id).val();
-    //    var Gender = $("input[type='radio']:checked" + id).val();
-    //    var TermsAndConditions = $("#chkIsTermsAccept" + id).val();
-    //    //remove current selected row
+
     //    $("#row" + id).remove();
     //    //append new row      
     //    var tblRow = ''
