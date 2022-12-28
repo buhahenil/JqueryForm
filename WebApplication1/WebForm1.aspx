@@ -325,32 +325,19 @@
             url: "/PersonService.asmx/DataDisplay",
             dataType: "json",
             success: function (data) {
-                $("#tblGridview").person({
-                    data: data[];
-                    for(int i = 0; i < data.length; i++){
-                        data = "<tr>   <td>' + Data[0].Pid + '</td>   <td>' + DataDisplay() + '</td>  <td>' + DataDisplay() + '</td>     <td>' + DataDisplay() + '</td>     <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>     <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>    <td>' + DataDisplay + '</td>   <td>' + DataDisplay + '</td>   <td>' + DataDisplay + '</td>   <td>' + DataDisplay + '</td>  
-                    }
-
-                )},
+                /*$("#tblGridview").person({*/
+                //data: data[];
+                for (let i = 0; i < data.length; i++) {
+                    data = '<tr>   <td>' + data[0].PRID + '</td>   <td>' + data[1].FirstName + '</td>  <td>' + data[2].MiddleName + '</td>     <td>' + data[3].LastName + '</td>     <td>' + data[4].Mobile + '</td>    <td>' + data[5].Address + '</td>    <td>' + data[6].Country + '</td>     <td>' + data[7].State + '</td>    <td>' + data[8].City + '</td>    <td>' + data[9].PinCode + '</td>   <td>' + data[10].birthday + '</td>   <td>' + data[11].Gender + '</td>   <td>' + data[12].Hobbies + '</td> </tr>'
+                };
+            },
+            error: function (err) {
+                console.log(err);
+            }
                 //console.log(data);
                 //console.log(data[0].Pid);
                 //console.log(data[0]["Pid"]);
                 //$("#tblGridview").append(tblRow);
-            //columns:
-            //    (data[0].Pid),
-            //            (data[1].FirstName),
-            //(data[2].MiddleName),
-            //(data[3].LastName),
-            //(data[4].Mobile),
-            //(data[5].Address),
-            //(data[6].Country),
-            //(data[7].State),
-            //(data[8].City),
-            //(data[9].PinCode),
-            //(data[10].birthday),
-            //(data[11].Gender),
-            //(data[12].Hobbies),
-            //(data[13].TermsAndConditions),
         });
     });
 
