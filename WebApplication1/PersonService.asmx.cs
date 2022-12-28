@@ -404,6 +404,12 @@ namespace WebApplication1
             //Serialize table 
             Context.Response.Write(JsonConvert.SerializeObject(dt));
         }
+        //row data delete
+        [WebMethod]
+        [ScriptMethod]
+        public void Edit() 
+        {
 
+        }
     }
 }
