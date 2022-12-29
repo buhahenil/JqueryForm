@@ -363,13 +363,14 @@
                     $("#ddlCity").val(arrData[0].City);
                     $("#txtPinCode").val(arrData[0].Pincode);
                     $("#txtbirthday").val(arrData[0].DateOfBrith);
+
                     $("input:checkbox[class=ads_Checkbox]:checked").val(arrData[0].Hobbies)
-                    $("input[type='radio']:checked").val('checked', arrData[0].Gender);
-                    //var arr = [];
-                    //$("input:checkbox[class=ads_Checkbox]:checked").each(function () {
-                    //    arr.push($(this).val(arrData[0].Hobbies));
-                    //});
-                    
+                    $("input[type='radio']:checked").checkbox(arrData[0].Gender);
+                    var arr = [];
+                    $("input:checkbox[class=ads_Checkbox]:checked").each(function () {
+                        arr.push($(this).val(arrData[0].Hobbies));
+                    });
+
                     $("#chkIsTermsAccept").val(arrData[0].TermsAndConditions);
                 },
                 error: function (err) {
