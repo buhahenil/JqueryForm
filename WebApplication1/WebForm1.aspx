@@ -37,7 +37,7 @@
         <br />
         <br />
         <input type="button" id="btnAddnew" value="Add New" />
-        <table border="2">
+        <table border="2" id="tblForms">
             <tr>
                 <td>
                     <span id="lblFirstName">First Name</span>
@@ -173,6 +173,7 @@
             <tr>
                 <td colspan="2" style="text-align: center; align-items: center; align-content: center; align-self: center;">
                     <input type="button" name="Submit" value="Sumbit" id="btnSubmit" disabled="disabled" style="height: 26px" />
+                    <%--<input type="button" name="Update " value="Update" id="btnUpdate" disabled="disabled" style="height: 26px" />--%>
                 </td>
             </tr>
         </table>
@@ -337,9 +338,45 @@
             var gender = $(this).parents("tr").find('td:eq(12)').text();
             var hobbies = $(this).parents("tr").find('td:eq(13)').text();
             var termsandconditions = $(this).parents("tr").find('td:eq(14)').text().toString();
-            
-            //debugger;
 
+            //debugger;
+            
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/PersonService.asmx/FilltheData",
+            //    data: JSON.stringify(data),
+            //    dataType: "json",
+            //    success: function (data) {
+            //        console.log(data);
+            //        for (let i = 0; i < data.length; i++) {
+            //            $("#tblGridview").append('<tr>   <td>' + data[i].Pid + '</td>   <td>' + data[i].PRID + '</td>   <td>' + data[i].FirstName + '</td>  <td>' + data[i].MiddleName + '</td>     <td>' + data[i].LastName + '</td>     <td>' + data[i].MoblieNumber + '</td>    <td>' + data[i].Address + '</td>    <td>' + data[i].Country + '</td>     <td>' + data[i].State + '</td>    <td>' + data[i].City + '</td>    <td>' + data[i].Pincode + '</td>   <td>' + data[i].DateOfBrith + '</td>   <td>' + data[i].Gender + '</td>   <td>' + data[i].Hobbies + '</td>  <td>' + data[i].TermsAndConditions + '</td>    <td><input type="button" id="btnEdit" value="Edit"> </td><td><input type="button" id="btnDelete" value="Delete"> </td>  </tr>');
+            //        };
+            //    },
+            //    error: function (err) {
+            //        console.log(err);
+            //    }
+            //    //console.log(data); console.log(data[0].Pid); console.log(data[0]["Pid"]);
+            //});
+
+            // data fill the form
+            var data = {};
+            data.Pid = pid;
+            $.ajax({
+                url: "/PersonService.asmx/FilltheData",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data),
+                success: function (res) {
+                    //console.log(res);
+                    for (let i = 0; i < res.length; i++) {
+                        $("#tblForms").append('<tr>   <td><input>' + res[i].Pid + '<input></td>   <td>' + res[i].PRID + '</td>   <td>' + res[i].FirstName + '</td>  <td>' + res[i].MiddleName + '</td>     <td>' + res[i].LastName + '</td>     <td>' + res[i].MoblieNumber + '</td>    <td>' + res[i].Address + '</td>    <td>' + res[i].Country + '</td>     <td>' + res[i].State + '</td>    <td>' + res[i].City + '</td>    <td>' + res[i].Pincode + '</td>   <td>' + res[i].DateOfBrith + '</td>   <td>' + res[i].Gender + '</td>   <td>' + res[i].Hobbies + '</td>  <td>' + res[i].TermsAndConditions + '</td>    <td><input type="button" id="btnEdit" value="Edit"> </td><td><input type="button" id="btnDelete" value="Delete"> </td>  </tr>');
+                    };
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
         });
 
         // data table 
@@ -352,69 +389,68 @@
                 for (let i = 0; i < data.length; i++) {
                     $("#tblGridview").append('<tr>   <td>' + data[i].Pid + '</td>   <td>' + data[i].PRID + '</td>   <td>' + data[i].FirstName + '</td>  <td>' + data[i].MiddleName + '</td>     <td>' + data[i].LastName + '</td>     <td>' + data[i].MoblieNumber + '</td>    <td>' + data[i].Address + '</td>    <td>' + data[i].Country + '</td>     <td>' + data[i].State + '</td>    <td>' + data[i].City + '</td>    <td>' + data[i].Pincode + '</td>   <td>' + data[i].DateOfBrith + '</td>   <td>' + data[i].Gender + '</td>   <td>' + data[i].Hobbies + '</td>  <td>' + data[i].TermsAndConditions + '</td>    <td><input type="button" id="btnEdit" value="Edit"> </td><td><input type="button" id="btnDelete" value="Delete"> </td>  </tr>');
                 };
-
             },
             error: function (err) {
                 console.log(err);
             }
-            //console.log(data);
-            //console.log(data[0].Pid);
-            //console.log(data[0]["Pid"]);
+            //console.log(data); console.log(data[0].Pid); console.log(data[0]["Pid"]);
         });
+
+
+
+        /* disable button */
+        $(function () {
+            $('#chkIsTermsAccept').click(function () {
+                if ($(this).is(':checked')) {
+                    $('#btnSubmit').removeAttr('disabled');
+                } else {
+                    $('#btnSubmit').attr('disabled', 'disabled');
+                }
+            });
+        });
+
+        function disableDropDown(idDrop, name) {
+            $("#" + idDrop + "").prop("disabled", true);
+            resetDropDown(idDrop, name);
+        }
+
+        function resetDropDown(idDrop, name) {
+            $("#" + idDrop + "").empty();
+            $("#" + idDrop + "").append($("<option></option>").val('0').html('--Select ' + name + '--'));
+        }
+
+        function formReset() {
+            $("#txtFirstName").val('');
+            $("#txtMiddleName").val('');
+            $("#txtLastName").val('');
+            $("#txtMobile").val('');
+            $("#txtAddress").val('');
+            //dropdown list 
+            $("#ddlCountry").prop('selectedIndex', 0).removeAttr('disabled', true);
+            $("#ddlState").prop('selectedIndex', 0).removeAttr('disabled', true);
+            $("#ddlCity").prop('selectedIndex', 0).removeAttr('disabled', true);
+            $('#ddlCountry').change(ddlState);
+            $('#ddlState').change(ddlCity).prop('disabled', true);
+            $('#ddlCity').prop('disabled', true);
+
+            $("#txtPinCode").val('');
+            $("#txtbirthday").val('');
+            $("input[type='radio']:checked").prop('checked', false);
+            $("input:checkbox[class=ads_Checkbox]:checked").each(function () {
+                $(this).prop('checked', false);
+            });
+            $("#chkIsTermsAccept").prop('checked', false).removeAttr('disabled', true);
+            $('#btnSubmit').attr('disabled', 'disabled');
+
+        }
     });
-
-    /* disable button */
-    $(function () {
-        $('#chkIsTermsAccept').click(function () {
-            if ($(this).is(':checked')) {
-                $('#btnSubmit').removeAttr('disabled');
-            } else {
-                $('#btnSubmit').attr('disabled', 'disabled');
-            }
-        });
-    });
-
-    function disableDropDown(idDrop, name) {
-        $("#" + idDrop + "").prop("disabled", true);
-        resetDropDown(idDrop, name);
-    }
-
-    function resetDropDown(idDrop, name) {
-        $("#" + idDrop + "").empty();
-        $("#" + idDrop + "").append($("<option></option>").val('0').html('--Select ' + name + '--'));
-    }
-
-    function formReset() {
-        $("#txtFirstName").val('');
-        $("#txtMiddleName").val('');
-        $("#txtLastName").val('');
-        $("#txtMobile").val('');
-        $("#txtAddress").val('');
-        //dropdown list 
-        $("#ddlCountry").prop('selectedIndex', 0).removeAttr('disabled', true);
-        $("#ddlState").prop('selectedIndex', 0).removeAttr('disabled', true);
-        $("#ddlCity").prop('selectedIndex', 0).removeAttr('disabled', true);
-        $('#ddlCountry').change(ddlState);
-        $('#ddlState').change(ddlCity).prop('disabled', true);
-        $('#ddlCity').prop('disabled', true);
-
-        $("#txtPinCode").val('');
-        $("#txtbirthday").val('');
-        $("input[type='radio']:checked").prop('checked', false);
-        $("input:checkbox[class=ads_Checkbox]:checked").each(function () {
-            $(this).prop('checked', false);
-        });
-        $("#chkIsTermsAccept").prop('checked', false).removeAttr('disabled', true);
-        $('#btnSubmit').attr('disabled', 'disabled');
-
-    }
 
 
     //    $("#row" + id).remove();
     //    //append new row      
     //    var tblRow = ''
     //    $("#tbl").append(tblRow);
-    //}
+
 
 </script>
 </html>

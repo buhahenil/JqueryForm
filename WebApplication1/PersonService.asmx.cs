@@ -404,12 +404,28 @@ namespace WebApplication1
             //Serialize table 
             Context.Response.Write(JsonConvert.SerializeObject(dt));
         }
-        //row data delete
+
+        // FilltheData
         [WebMethod]
         [ScriptMethod]
-        public void Edit() 
+        public string FilltheData(string Pid)
         {
-            
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("sppersonSelectedbyId", con);
+            con.Open();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            cmd.CommandType = CommandType.StoredProcedure;
+            DataTable dt = new DataTable();
+            DataSet ds = new DataSet();
+            cmd.Parameters.AddWithValue("@Pid", Pid);
+            //cmd.Parameters.AddWithValue("@PRID", PRId);
+            sda.Fill(dt);
+            con.Close();
+            //if (dt.Rows.Count > 0)
+            //{
+            //    Databind(dt.Rows[0]);
+            //}
+            return JsonConvert.SerializeObject(dt);
         }
     }
 }
