@@ -141,9 +141,9 @@
                     <span id="lblGender">Gender</span>
                 </td>
                 <td>
-                    <input type="radio" name="gender" value="male" />
+                    <input type="radio" name="gender" value="Male" />
                     Male
-                    <input type="radio" name="gender" value="female" />
+                    <input type="radio" name="gender" value="Female" />
                     Female
 
                 </td>
@@ -370,7 +370,7 @@
                 success: function (res) {
                     //console.log(res);
                     for (let i = 0; i < res.length; i++) {
-                        $("#tblForms").append('<tr>   <td><input>' + res[i].Pid + '<input></td>   <td>' + res[i].PRID + '</td>   <td>' + res[i].FirstName + '</td>  <td>' + res[i].MiddleName + '</td>     <td>' + res[i].LastName + '</td>     <td>' + res[i].MoblieNumber + '</td>    <td>' + res[i].Address + '</td>    <td>' + res[i].Country + '</td>     <td>' + res[i].State + '</td>    <td>' + res[i].City + '</td>    <td>' + res[i].Pincode + '</td>   <td>' + res[i].DateOfBrith + '</td>   <td>' + res[i].Gender + '</td>   <td>' + res[i].Hobbies + '</td>  <td>' + res[i].TermsAndConditions + '</td>    <td><input type="button" id="btnEdit" value="Edit"> </td><td><input type="button" id="btnDelete" value="Delete"> </td>  </tr>');
+                        $("#tblForms").prepend('<tr>   <input>' + res[i].FirstName + '</input>  <input>' + res[i].MiddleName + '</input>     <input>' + res[i].LastName + '</input>     <input>' + res[i].MoblieNumber + '</input>   <input>' + res[i].Address + '</input>    <input>' + res[i].Country + '</input>     <input>' + res[i].State + '</input>   <input>' + res[i].City + '</input>    <input>' + res[i].Pincode + '</input>   <input>' + res[i].DateOfBrith + '</input>   <input>' + res[i].Gender + '</input>   <input>' + res[i].Hobbies + '</input>  <input>' + res[i].TermsAndConditions + '</input>  </tr>');
                     };
                 },
                 error: function (err) {
