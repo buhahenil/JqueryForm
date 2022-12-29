@@ -340,24 +340,6 @@
             var termsandconditions = $(this).parents("tr").find('td:eq(14)').text().toString();
 
             //debugger;
-            
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/PersonService.asmx/FilltheData",
-            //    data: JSON.stringify(data),
-            //    dataType: "json",
-            //    success: function (data) {
-            //        console.log(data);
-            //        for (let i = 0; i < data.length; i++) {
-            //            $("#tblGridview").append('<tr>   <td>' + data[i].Pid + '</td>   <td>' + data[i].PRID + '</td>   <td>' + data[i].FirstName + '</td>  <td>' + data[i].MiddleName + '</td>     <td>' + data[i].LastName + '</td>     <td>' + data[i].MoblieNumber + '</td>    <td>' + data[i].Address + '</td>    <td>' + data[i].Country + '</td>     <td>' + data[i].State + '</td>    <td>' + data[i].City + '</td>    <td>' + data[i].Pincode + '</td>   <td>' + data[i].DateOfBrith + '</td>   <td>' + data[i].Gender + '</td>   <td>' + data[i].Hobbies + '</td>  <td>' + data[i].TermsAndConditions + '</td>    <td><input type="button" id="btnEdit" value="Edit"> </td><td><input type="button" id="btnDelete" value="Delete"> </td>  </tr>');
-            //        };
-            //    },
-            //    error: function (err) {
-            //        console.log(err);
-            //    }
-            //    //console.log(data); console.log(data[0].Pid); console.log(data[0]["Pid"]);
-            //});
-
             // data fill the form
             var data = {};
             data.Pid = pid;
@@ -369,9 +351,26 @@
                 data: JSON.stringify(data),
                 success: function (res) {
                     //console.log(res);
-                    for (let i = 0; i < res.length; i++) {
-                        $("#tblForms").prepend('<tr>   <input>' + res[i].FirstName + '</input>  <input>' + res[i].MiddleName + '</input>     <input>' + res[i].LastName + '</input>     <input>' + res[i].MoblieNumber + '</input>   <input>' + res[i].Address + '</input>    <input>' + res[i].Country + '</input>     <input>' + res[i].State + '</input>   <input>' + res[i].City + '</input>    <input>' + res[i].Pincode + '</input>   <input>' + res[i].DateOfBrith + '</input>   <input>' + res[i].Gender + '</input>   <input>' + res[i].Hobbies + '</input>  <input>' + res[i].TermsAndConditions + '</input>  </tr>');
-                    };
+                    var arrData = JSON.parse(res.d);
+
+                    $("#txtFirstName").val(arrData[0].FirstName);
+                    $("#txtMiddleName").val(arrData[0].MiddleName);
+                    $("#txtLastName").val(arrData[0].LastName);
+                    $("#txtMobile").val(arrData[0].MoblieNumber);
+                    $("#txtAddress").val(arrData[0].Address);
+                    $("#ddlCountry").val(arrData[0].Country);
+                    $("#ddlState").val(arrData[0].State);
+                    $("#ddlCity").val(arrData[0].City);
+                    $("#txtPinCode").val(arrData[0].Pincode);
+                    $("#txtbirthday").val(arrData[0].DateOfBrith);
+                    //$("input[type='radio']:checked").val(arrData[0].gender);
+                    $("input[type='radio']:checked").val('checked', arrData[0].Gender);
+                    var arr = [];
+                    $("input:checkbox[class=ads_Checkbox]:checked").each(function () {
+                        arr.push($(this).val(arrData[0].Hobbies));
+                    });
+                    
+                    $("#chkIsTermsAccept").val(arrData[0].TermsAndConditions);
                 },
                 error: function (err) {
                     console.log(err);
