@@ -141,11 +141,10 @@
                     <span id="lblGender">Gender</span>
                 </td>
                 <td>
-                    <input type="radio" name="gender" value="Male" />
+                    <input type="radio" id="male" name="gender" value="Male" />
                     Male
-                    <input type="radio" name="gender" value="Female" />
+                    <input type="radio" id="female" name="gender" value="Female" />
                     Female
-
                 </td>
             </tr>
 
@@ -364,12 +363,20 @@
                     $("#ddlCity").val(arrData[0].City);
 
                     $("#txtPinCode").val(arrData[0].Pincode);
-                    $("input[type='radio']:checked").val(arrData[0].Gender);
+
+                    $('[name="gender"]').removeAttr('checked');
+                    $("input[name=gender][id=" + arrData[0].Gender.toLowerCase() + "]").prop('checked', true);
+
                     debugger;
                     var Bdate = moment($("#txtbirthday").val(arrData[0].birthday)).format('DD-MM-YYYY');
                     $("#txtbirthday").text(Bdate);
                     //debugger;
-                    
+
+                    var arr = [];
+                    $("input:checkbox[class=ads_Checkbox]:checked").each(function () {
+                        arr.push($(this).val());
+                    });
+
                     $("#chkIsTermsAccept").val(arrData[0].TermsAndConditions);
                 },
                 error: function (err) {
