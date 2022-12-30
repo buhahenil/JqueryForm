@@ -366,16 +366,9 @@
 
                     $('[name="gender"]').removeAttr('checked');
                     $("input[name=gender][id=" + arrData[0].Gender.toLowerCase() + "]").prop('checked', true);
-
-                    debugger;
-                    var Bdate = moment($("#txtbirthday").val(arrData[0].birthday)).format('DD-MM-YYYY');
-                    $("#txtbirthday").text(Bdate);
-                    //debugger;
-
-                    var arr = [];
-                    $("input:checkbox[class=ads_Checkbox]:checked").each(function () {
-                        arr.push($(this).val());
-                    });
+                    
+                    $('[name="cblHobbies$0"]').removeAttr('checked');
+                    $("input[name=cblHobbies$0][id=" + arrData[0].Hobbies + "]").attr('checked', true);
 
                     $("#chkIsTermsAccept").val(arrData[0].TermsAndConditions);
                 },
