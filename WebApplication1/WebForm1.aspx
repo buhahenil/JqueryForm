@@ -411,7 +411,7 @@
                 }
             });
         });
-        //
+        // button submit and update hide and show
         $(function () {
             $('body').on('click', '#btnEdit', function (){
                 if ($('#btnUpdate').show()) {
