@@ -173,7 +173,7 @@
             <tr>
                 <td colspan="2" style="text-align: center; align-items: center; align-content: center; align-self: center;">
                     <input type="button" name="Submit" value="Sumbit" id="btnSubmit" disabled="disabled" style="height: 26px" />
-                    <%--<input type="button" name="Update " value="Update" id="btnUpdate" disabled="disabled" style="height: 26px" />--%>
+                    <input type="button" name="Update " value="Update" id="btnUpdate" disabled="disabled" style="height: 26px" />
                 </td>
             </tr>
         </table>
@@ -358,19 +358,18 @@
                     $("#txtLastName").val(arrData[0].LastName);
                     $("#txtMobile").val(arrData[0].MoblieNumber);
                     $("#txtAddress").val(arrData[0].Address);
+
                     $("#ddlCountry").val(arrData[0].Country);
                     $("#ddlState").val(arrData[0].State);
                     $("#ddlCity").val(arrData[0].City);
+
                     $("#txtPinCode").val(arrData[0].Pincode);
-                    $("#txtbirthday").val(arrData[0].DateOfBrith);
-
-                    $("input:checkbox[class=ads_Checkbox]:checked").val(arrData[0].Hobbies)
-                    $("input[type='radio']:checked").checkbox(arrData[0].Gender);
-                    var arr = [];
-                    $("input:checkbox[class=ads_Checkbox]:checked").each(function () {
-                        arr.push($(this).val(arrData[0].Hobbies));
-                    });
-
+                    $("input[type='radio']:checked").val(arrData[0].Gender);
+                    debugger;
+                    var Bdate = moment($("#txtbirthday").val(arrData[0].birthday)).format('DD-MM-YYYY');
+                    $("#txtbirthday").text(Bdate);
+                    //debugger;
+                    
                     $("#chkIsTermsAccept").val(arrData[0].TermsAndConditions);
                 },
                 error: function (err) {
@@ -403,11 +402,27 @@
             $('#chkIsTermsAccept').click(function () {
                 if ($(this).is(':checked')) {
                     $('#btnSubmit').removeAttr('disabled');
+                    $('#btnUpdate').removeAttr('disabled');
+                    //$('#btnUpdate').show();
                 } else {
                     $('#btnSubmit').attr('disabled', 'disabled');
+                    $('#btnUpdate').attr('disabled', 'disabled');
+                    //$('#btnUpdate').hide();
                 }
             });
         });
+        //
+        $(function () {
+            $('body').on('click', '#btnEdit', function (){
+                if ($('#btnUpdate').show()) {
+                    $('#btnSubmit').hide();
+                } //else {
+                //    $('#btnUpdate').show();
+                //    $('#btnSubmit').hide();
+                //}
+            });
+        });
+
 
         function disableDropDown(idDrop, name) {
             $("#" + idDrop + "").prop("disabled", true);
