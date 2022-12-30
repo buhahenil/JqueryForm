@@ -364,13 +364,20 @@
 
                     $("#txtPinCode").val(arrData[0].Pincode);
 
+                    // gender 
                     $('[name="gender"]').removeAttr('checked');
                     $("input[name=gender][id=" + arrData[0].Gender.toLowerCase() + "]").prop('checked', true);
-                    
-                    $('[name="cblHobbies$0"]').removeAttr('checked');
-                    $("input[name=cblHobbies$0][id=" + arrData[0].Hobbies + "]").attr('checked', true);
 
-                    $("#chkIsTermsAccept").val(arrData[0].TermsAndConditions);
+                    // hobbies
+                    $('[name="cblHobbies$0"]').removeAttr('selected');
+                    $("input[name=cblHobbies$0][id=" + arrData[0].Hobbies + "]").prop('checked', true);
+
+                    //$('input[name="cblHobbies$0"]:checked').each(function () {
+                    //    console.log(this.arrData[0].Hobbies);
+                    //});
+
+
+                    $("#chkIsTermsAccept").prop(arrData[0].TermsAndConditions);
                 },
                 error: function (err) {
                     console.log(err);
