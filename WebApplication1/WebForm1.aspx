@@ -361,22 +361,23 @@
                     $("#ddlCountry").val(arrData[0].Country);
                     $("#ddlState").val(arrData[0].State);
                     $("#ddlCity").val(arrData[0].City);
-
                     $("#txtPinCode").val(arrData[0].Pincode);
+                    $("#txtbirthday").val(arrData[0].DateOfBrith);
 
-                    // gender 
+                    //$("#txtbirthday").val(arrData[0].DateOfBrith.Convert.ToDateTime(row["DateOfBrith"]).ToString("yyyy-MM-dd"));
+
+
+                    // gender
                     $('[name="gender"]').removeAttr('checked');
                     $("input[name=gender][id=" + arrData[0].Gender.toLowerCase() + "]").prop('checked', true);
 
                     // hobbies
-                    $('[name="cblHobbies$0"]').removeAttr('selected');
-                    $("input[name=cblHobbies$0][id=" + arrData[0].Hobbies + "]").prop('checked', true);
-
-                    //$('input[name="cblHobbies$0"]:checked').each(function () {
-                    //    console.log(this.arrData[0].Hobbies);
-                    //});
-
-
+                    $('[name="cblHobbies$0"]').prop('checked', false);
+                    var arr = arrData[0].Hobbies.split(',');
+                    for (var i = 0; i < arr.length; i++) {
+                        $("input:checkbox[class=ads_Checkbox][value=" + arr[i] + "]").prop('checked', true);
+                    }
+                    /*debugger;*/
                     $("#chkIsTermsAccept").prop(arrData[0].TermsAndConditions);
                 },
                 error: function (err) {
@@ -403,7 +404,6 @@
         });
 
 
-
         /* disable button */
         $(function () {
             $('#chkIsTermsAccept').click(function () {
@@ -420,7 +420,7 @@
         });
         // button submit and update hide and show
         $(function () {
-            $('body').on('click', '#btnEdit', function (){
+            $('body').on('click', '#btnEdit', function () {
                 if ($('#btnUpdate').show()) {
                     $('#btnSubmit').hide();
                 } //else {
@@ -463,7 +463,6 @@
             });
             $("#chkIsTermsAccept").prop('checked', false).removeAttr('disabled', true);
             $('#btnSubmit').attr('disabled', 'disabled');
-
         }
     });
 

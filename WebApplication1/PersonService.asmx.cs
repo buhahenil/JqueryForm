@@ -405,7 +405,7 @@ namespace WebApplication1
             Context.Response.Write(JsonConvert.SerializeObject(dt));
         }
 
-        // FilltheData
+        // FilltheData on form
         [WebMethod]
         [ScriptMethod]
         public string FilltheData(string Pid)
@@ -421,11 +421,11 @@ namespace WebApplication1
             //cmd.Parameters.AddWithValue("@PRID", PRId);
             sda.Fill(dt);
             con.Close();
-            //if (dt.Rows.Count > 0)
-            //{
-            //    Databind(dt.Rows[0]);
-            //}
             return JsonConvert.SerializeObject(dt);
         }
+
+
+        //update record code
+        
     }
 }
