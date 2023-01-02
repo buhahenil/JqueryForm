@@ -197,15 +197,15 @@ namespace WebApplication1
 
 
             //---------- date of brithday -------------
-            if (string.IsNullOrEmpty(person.birthday))
+            if (string.IsNullOrEmpty(person.Birthday))
             {
                 result.success = false;
                 result.error = "Date Of Brith should be required.";
                 return result;
             }
             var today = DateTime.Today;
-            var age = today.Year - Convert.ToDateTime(person.birthday).Year;
-            if (Convert.ToDateTime(person.birthday).Date > today.AddYears(-age)) age--;
+            var age = today.Year - Convert.ToDateTime(person.Birthday).Year;
+            if (Convert.ToDateTime(person.Birthday).Date > today.AddYears(-age)) age--;
             if (age < 18 || age > 200)
             {
                 result.success = false;
@@ -289,7 +289,7 @@ namespace WebApplication1
                 cmd.Parameters.Add(new SqlParameter()
                 {
                     ParameterName = "@DateOfBrith",
-                    Value = person.birthday
+                    Value = person.Birthday
                 });
                 cmd.Parameters.Add(new SqlParameter()
                 {

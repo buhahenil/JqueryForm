@@ -11,7 +11,7 @@
         public string State { get; set; }
         public string City { get; set; }
         public string Pincode { get; set; }
-        public string birthday { get; set; }
+        public string Birthday { get; set; }
         public string Gender { get; set; }
         public string Hobbies { get; set; }
         public string TermsAndConditions { get; set; }

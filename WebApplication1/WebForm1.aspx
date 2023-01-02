@@ -132,7 +132,7 @@
                     <span id="lblDateOfBrith">Date Of Brith</span>
                 </td>
                 <td>
-                    <input type="date" id="txtbirthday" name="birthday" />
+                    <input type="date" id="txtbirthday" name="Birthday" />
                 </td>
             </tr>
 
@@ -192,7 +192,7 @@
             person.State = $("#ddlState").val();
             person.City = $("#ddlCity").val();
             person.PinCode = $("#txtPinCode").val();
-            person.birthday = $("#txtbirthday").val();
+            person.Birthday = $("#txtbirthday").val();
             person.Gender = $("input[type='radio']:checked").val();
 
             var arr = [];
@@ -362,11 +362,13 @@
                     $("#ddlState").val(arrData[0].State);
                     $("#ddlCity").val(arrData[0].City);
                     $("#txtPinCode").val(arrData[0].Pincode);
-                    $("#txtbirthday").val(arrData[0].DateOfBrith);
 
-                    //$("#txtbirthday").val(arrData[0].DateOfBrith.Convert.ToDateTime(row["DateOfBrith"]).ToString("yyyy-MM-dd"));
+                    var year = new Date(arrData[0].DateOfBrith).getFullYear();
+                    var month = (new Date(arrData[0].DateOfBrith).getMonth() + 1) < 10 ? ("0" + (new Date(arrData[0].DateOfBrith).getMonth() + 1)) : (new Date(arrData[0].DateOfBrith).getMonth() + 1);
+                    var day = (new Date(arrData[0].DateOfBrith).getDate()) < 10 ? ("0" + (new Date(arrData[0].DateOfBrith).getDate())) : (new Date(arrData[0].DateOfBrith).getDate());
 
-
+                    $("#txtbirthday").val(year + "-" + month + "-" + day);
+                    debugger;
                     // gender
                     $('[name="gender"]').removeAttr('checked');
                     $("input[name=gender][id=" + arrData[0].Gender.toLowerCase() + "]").prop('checked', true);
@@ -377,8 +379,11 @@
                     for (var i = 0; i < arr.length; i++) {
                         $("input:checkbox[class=ads_Checkbox][value=" + arr[i] + "]").prop('checked', true);
                     }
+
                     /*debugger;*/
-                    $("#chkIsTermsAccept").prop(arrData[0].TermsAndConditions);
+
+                    $("#chkIsTermsAccept").attr(arrData[0].TermsAndConditions);
+                    console.log(arrData[0].TermsAndConditions);
                 },
                 error: function (err) {
                     console.log(err);
