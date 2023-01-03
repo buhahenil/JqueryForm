@@ -9,7 +9,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <table border="2" id="tblGridview">
+        <table border="2" id="tblGridview" align="center">
             <thead>
                 <tr>
                     <th>Pid</th>
@@ -36,8 +36,8 @@
         </table>
         <br />
         <br />
-        <input type="button" id="btnAddnew" value="Add New" />
-        <table border="2" id="tblForms">
+        <input type="button" id="btnAddnew" value="Add New" align="right"/>
+        <table border="2" id="tblForms" >
             <tr>
                 <td>
                     <span id="lblFirstName">First Name</span>
@@ -165,7 +165,7 @@
 
             <tr>
                 <td colspan="2">
-                    <input type="checkbox" id="chkIsTermsAccept" name="chkIsTermsAccept" value="1" />
+                    <input type="checkbox" id="chkIsTermsAccept" name="chkIsTermsAccept" value="true" />
                     <label for="chkIsTermsAccept">I Agree with this from</label>
                 </td>
             </tr>
@@ -390,8 +390,12 @@
 
                     /*debugger;*/
 
-                    $('#chkIsTermsAccept').val(arrData[0].TermsAndConditions);
-                    console.log(arrData[0].TermsAndConditions);
+                    $('[name="chkIsTermsAccept"]').removeAttr('checked');
+                    $("input:checkbox[name=chkIsTermsAccept][value=" + arrData[0].TermsAndConditions + "]").prop('checked', true);
+                    //console.log(arrData[0].TermsAndConditions);
+
+                   
+                    debugger;
                 },
                 error: function (err) {
                     console.log(err);
@@ -407,7 +411,8 @@
             success: function (data) {
                 //console.log(data);
                 for (let i = 0; i < data.length; i++) {
-                    $("#tblGridview").append('<tr>   <td>' + data[i].Pid + '</td>   <td>' + data[i].PRID + '</td>   <td>' + data[i].FirstName + '</td>  <td>' + data[i].MiddleName + '</td>     <td>' + data[i].LastName + '</td>     <td>' + data[i].MoblieNumber + '</td>    <td>' + data[i].Address + '</td>    <td>' + data[i].Country + '</td>     <td>' + data[i].State + '</td>    <td>' + data[i].City + '</td>    <td>' + data[i].Pincode + '</td>   <td>' + data[i].DateOfBrith + '</td>   <td>' + data[i].Gender + '</td>   <td>' + data[i].Hobbies + '</td>  <td>' + data[i].TermsAndConditions + '</td>    <td><input type="button" id="btnEdit" value="Edit"> </td><td><input type="button" id="btnDelete" value="Delete"> </td>  </tr>');
+                    $("#tblGridview").append('<tr>   <td>' + data[i].Pid + '</td>   <td align="center">' + data[i].PRID + '</td>   <td align="center">' + data[i].FirstName + '</td>  <td align="center">' + data[i].MiddleName + '</td>     <td align="center">' + data[i].LastName + '</td>     <td align="center">' + data[i].MoblieNumber + '</td>    <td align="center">' + data[i].Address + '</td>    <td align="center">' + data[i].Country + '</td>     <td align="center">' + data[i].State + '</td>    <td align="center">' + data[i].City + '</td>    <td align="center">' + data[i].Pincode + '</td>   <td align="center">' + data[i].DateOfBrith + '</td>   <td align="center">' + data[i].Gender + '</td>   <td align="center">' + data[i].Hobbies + '</td>  <td align="center"><input type="checkbox" id="cheTeam" name="TermsAndConditions" value="'+ data[i].TermsAndConditions +'" ></td>    <td><input type="button" id="btnEdit" value="Edit"> </td><td><input type="button" id="btnDelete" value="Delete"> </td>  </tr>');
+                    console.log(data[i].TermsAndConditions);
                 };
             },
             error: function (err) {
