@@ -36,8 +36,9 @@
         </table>
         <br />
         <br />
-        <input type="button" id="btnAddnew" value="Add New" align="right"/>
-        <table border="2" id="tblForms" >
+        <div align="center">
+        <input type="button" id="btnAddnew" value="Add New" /></div><br/>
+        <table border="2" id="tblForms" align="center">
             <tr>
                 <td>
                     <span id="lblFirstName">First Name</span>
@@ -336,7 +337,7 @@
             var dateofbrith = $(this).parents("tr").find('td:eq(11)').text();
             var gender = $(this).parents("tr").find('td:eq(12)').text();
             var hobbies = $(this).parents("tr").find('td:eq(13)').text();
-            var termsandconditions = $(this).parents("tr").find('td:eq(14)').text().toString();
+            var termsandconditions = $(this).parents("tr").find('td:eq(14)').text();//.toString();
 
             //debugger;
             // data fill the form
@@ -389,9 +390,10 @@
                     }
 
                     /*debugger;*/
+                    $("#chkIsTermsAccept").removeAttr('checked');
+                    $("#chkIsTermsAccept").val(arrData[0].TermsAndConditions).attr('checked', true);
 
-                    $('[name="chkIsTermsAccept"]').removeAttr('checked');
-                    $("input:checkbox[name=chkIsTermsAccept][value=" + arrData[0].TermsAndConditions + "]").prop('checked', true);
+
                     //console.log(arrData[0].TermsAndConditions);
 
                    
@@ -411,8 +413,8 @@
             success: function (data) {
                 //console.log(data);
                 for (let i = 0; i < data.length; i++) {
-                    $("#tblGridview").append('<tr>   <td>' + data[i].Pid + '</td>   <td align="center">' + data[i].PRID + '</td>   <td align="center">' + data[i].FirstName + '</td>  <td align="center">' + data[i].MiddleName + '</td>     <td align="center">' + data[i].LastName + '</td>     <td align="center">' + data[i].MoblieNumber + '</td>    <td align="center">' + data[i].Address + '</td>    <td align="center">' + data[i].Country + '</td>     <td align="center">' + data[i].State + '</td>    <td align="center">' + data[i].City + '</td>    <td align="center">' + data[i].Pincode + '</td>   <td align="center">' + data[i].DateOfBrith + '</td>   <td align="center">' + data[i].Gender + '</td>   <td align="center">' + data[i].Hobbies + '</td>  <td align="center"><input type="checkbox" id="cheTeam" name="TermsAndConditions" value="'+ data[i].TermsAndConditions +'" ></td>    <td><input type="button" id="btnEdit" value="Edit"> </td><td><input type="button" id="btnDelete" value="Delete"> </td>  </tr>');
-                    console.log(data[i].TermsAndConditions);
+                    $("#tblGridview").append('<tr>   <td>' + data[i].Pid + '</td>   <td align="center">' + data[i].PRID + '</td>   <td align="center">' + data[i].FirstName + '</td>  <td align="center">' + data[i].MiddleName + '</td>     <td align="center">' + data[i].LastName + '</td>     <td align="center">' + data[i].MoblieNumber + '</td>    <td align="center">' + data[i].Address + '</td>    <td align="center">' + data[i].Country + '</td>     <td align="center">' + data[i].State + '</td>    <td align="center">' + data[i].City + '</td>    <td align="center">' + data[i].Pincode + '</td>   <td align="center">' + data[i].DateOfBrith + '</td>   <td align="center">' + data[i].Gender + '</td>   <td align="center">' + data[i].Hobbies + '</td>  <td align="center"><input type="checkbox" id="cheTeam" disabled="true" name="TermsAndConditions" value="true" ></td>    <td><input type="button" id="btnEdit" value="Edit"> </td><td><input type="button" id="btnDelete" value="Delete"></td>  </tr>');
+                    /*console.log(data[i].TermsAndConditions);*/
                 };
             },
             error: function (err) {
@@ -428,6 +430,7 @@
                 if ($(this).is(':checked')) {
                     $('#btnSubmit').removeAttr('disabled');
                     $('#btnUpdate').removeAttr('disabled');
+                    
                     //$('#btnUpdate').show();
                 } else {
                     $('#btnSubmit').attr('disabled', 'disabled');
@@ -441,8 +444,8 @@
             $('body').on('click', '#btnEdit', function () {
                 if ($('#btnUpdate').show()) {
                     $('#btnSubmit').hide();
-                } //else {
-                //    $('#btnUpdate').show();
+                }//else {
+                //   /*$('#btnUpdate').show();*/
                 //    $('#btnSubmit').hide();
                 //}
             });
