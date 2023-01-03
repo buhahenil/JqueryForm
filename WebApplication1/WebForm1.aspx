@@ -359,19 +359,24 @@
                     $("#txtAddress").val(arrData[0].Address);
 
                     $("#ddlCountry").val(arrData[0].Country);
-                    $("#ddlState").text(arrData[0].State);
-                    console.log(arrData[0].State);
-                    $("#ddlCity").text(arrData[0].City);
-                    console.log(arrData[0].City);
+                    $("#ddlCountry").trigger('change');
+
+                    setTimeout(() => {
+                        $("#ddlState").val(arrData[0].State);
+                        $("#ddlState").trigger('change');
+                        setTimeout(() => {
+                            $("#ddlCity").val(arrData[0].City);
+                        }, 500)
+                    }, 500);
 
                     $("#txtPinCode").val(arrData[0].Pincode);
 
+                    // Date
                     var year = new Date(arrData[0].DateOfBrith).getFullYear();
                     var month = (new Date(arrData[0].DateOfBrith).getMonth() + 1) < 10 ? ("0" + (new Date(arrData[0].DateOfBrith).getMonth() + 1)) : (new Date(arrData[0].DateOfBrith).getMonth() + 1);
                     var day = (new Date(arrData[0].DateOfBrith).getDate()) < 10 ? ("0" + (new Date(arrData[0].DateOfBrith).getDate())) : (new Date(arrData[0].DateOfBrith).getDate());
-
                     $("#txtbirthday").val(year + "-" + month + "-" + day);
-                    
+
                     // gender
                     $('[name="gender"]').removeAttr('checked');
                     $("input[name=gender][id=" + arrData[0].Gender.toLowerCase() + "]").prop('checked', true);
@@ -385,7 +390,7 @@
 
                     /*debugger;*/
 
-                    $("#chkIsTermsAccept").attr(arrData[0].TermsAndConditions);
+                    $('#chkIsTermsAccept').val(arrData[0].TermsAndConditions);
                     console.log(arrData[0].TermsAndConditions);
                 },
                 error: function (err) {
@@ -473,13 +478,6 @@
             $('#btnSubmit').attr('disabled', 'disabled');
         }
     });
-
-
-    //    $("#row" + id).remove();
-    //    //append new row      
-    //    var tblRow = ''
-    //    $("#tbl").append(tblRow);
-
 
 </script>
 </html>
