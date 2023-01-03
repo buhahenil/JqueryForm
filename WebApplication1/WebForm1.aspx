@@ -359,8 +359,11 @@
                     $("#txtAddress").val(arrData[0].Address);
 
                     $("#ddlCountry").val(arrData[0].Country);
-                    $("#ddlState").val(arrData[0].State);
-                    $("#ddlCity").val(arrData[0].City);
+                    $("#ddlState").text(arrData[0].State);
+                    console.log(arrData[0].State);
+                    $("#ddlCity").text(arrData[0].City);
+                    console.log(arrData[0].City);
+
                     $("#txtPinCode").val(arrData[0].Pincode);
 
                     var year = new Date(arrData[0].DateOfBrith).getFullYear();
@@ -368,7 +371,7 @@
                     var day = (new Date(arrData[0].DateOfBrith).getDate()) < 10 ? ("0" + (new Date(arrData[0].DateOfBrith).getDate())) : (new Date(arrData[0].DateOfBrith).getDate());
 
                     $("#txtbirthday").val(year + "-" + month + "-" + day);
-                    debugger;
+                    
                     // gender
                     $('[name="gender"]').removeAttr('checked');
                     $("input[name=gender][id=" + arrData[0].Gender.toLowerCase() + "]").prop('checked', true);
