@@ -175,7 +175,7 @@
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center; align-items: center; align-content: center; align-self: center;">
-                    <input type="button" name="Submit" value="Sumbit" id="btnSubmit" disabled="disabled" style="height: 26px" />
+                    <input type="button" name="Submit" value="Sumbit" id="btnSubmit" disabled="disabled" style="height: 26px"  />
                     <input type="button" name="Update " value="Update" id="btnUpdate" disabled="disabled" style="height: 26px" />
                 </td>
             </tr>
@@ -185,6 +185,7 @@
 <script src="Scripts/jquery-3.6.1.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        $("#btnUpdate").hide();
         $('#btnSubmit').click(function () {
             var person = {};
             person.FirstName = $("#txtFirstName").val();
@@ -412,14 +413,87 @@
                     $("#txtAddress").val(arrData[0].Address);
 
                     $("#ddlCountry").val(arrData[0].Country);
-                    $("#ddlCountry").trigger('change');
-                    setTimeout(() => {
-                        $("#ddlState").val(arrData[0].State);
-                        $("#ddlState").trigger('change');
-                        setTimeout(() => {
-                            $("#ddlCity").val(arrData[0].City);
-                        }, 500)
-                    }, 500);
+
+                    //----------------
+
+                    var CountryId = arrData[0].Country;
+                    var StateId = arrData[0].State;
+                    var CityId = arrData[0].City;
+
+                    if (!isNaN(CountryId)) {
+                        var Cid = {};
+                        Cid.CounrtyId = CountryId;
+                        if ($("#ddlCountry").val() != "0") {
+                            $("#ddlState").prop("disabled", false);
+                            $.ajax({
+                                url: "/PersonService.asmx/GetState",
+                                type: "POST",
+                                dataType: "json",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify(Cid),
+                                success: function (res) {
+                                    //debugger;
+                                    resetDropDown('ddlState', 'State');
+                                    $.each(res.d, function (data, value) {
+                                        $("#ddlState").append($("<option></option>").val(value.StateId).html(value.StateName));
+                                    });
+                                    $("#ddlState").val(StateId);
+
+                                    //----------State Change--------
+
+                                    if (!isNaN(StateId)) {
+                                        var CiId = {};
+                                        CiId.StateId = StateId;
+                                        if ($("#ddlState") != "0") {
+                                            $("#ddlCity").prop("disabled", false);
+                                            $.ajax({
+                                                url: "/PersonService.asmx/GetCity",
+                                                type: "POST",
+                                                dataType: "json",
+                                                contentType: "application/json; charset=utf-8",
+                                                data: JSON.stringify(CiId),
+                                                success: function (res) {
+                                                    //debugger;
+                                                    resetDropDown('ddlCity', 'City');
+                                                    $.each(res.d, function (data, value) {
+                                                        $("#ddlCity").append($("<option></option>").val(value.CityId).html(value.CityName));
+                                                    });
+                                                    $("#ddlCity").val(CityId);
+                                                },
+                                                error: function (err) {
+                                                    console.log(err);
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            disableDropDown('ddlCity', 'City');
+                                        }
+                                    }
+                                    else {
+                                        disableDropDown('ddlCity', 'City');
+                                    }
+
+                                    //---------State Change--------
+
+                                },
+                                error: function (err) {
+                                    console.log(err);
+                                }
+                            });
+                        }
+                        else {
+                            disableDropDown('ddlState', 'State');
+                            disableDropDown('ddlCity', 'City');
+                        }
+                    }
+                    else {
+                        disableDropDown('ddlState', 'State');
+                        disableDropDown('ddlCity', 'City');
+                    }
+
+                    //----------------
+
+
 
                     $("#txtPinCode").val(arrData[0].Pincode);
 
@@ -445,6 +519,17 @@
                     $("#chkIsTermsAccept").val(arrData[0].TermsAndConditions).attr('checked', true);
                     //console.log(arrData[0].TermsAndConditions);
                     debugger;
+                    $('#btnUpdate').show()
+                    $('#btnSubmit').hide();
+                    if ($("#chkIsTermsAccept").is(':checked')) {
+                        $('#btnSubmit').removeAttr('disabled');
+                        $('#btnUpdate').removeAttr('disabled');
+
+                    } else {
+                        $('#btnSubmit').attr('disabled', 'disabled');
+                        $('#btnUpdate').attr('disabled', 'disabled');
+
+                    }
                 },
                 error: function (err) {
                     console.log(err);
@@ -499,23 +584,17 @@
                 if ($(this).is(':checked')) {
                     $('#btnSubmit').removeAttr('disabled');
                     $('#btnUpdate').removeAttr('disabled');
-                    //
+                    
                 } else {
                     $('#btnSubmit').attr('disabled', 'disabled');
                     $('#btnUpdate').attr('disabled', 'disabled');
-                    //$('#btnUpdate').hide();
+                    
                 }
             });
         });
 
         // button submit and update hide and show
-        $(function () {
-            $('body').on('click', '#btnEdit', function () {
-                if ($('#btnUpdate').show()) {
-                    $('#btnSubmit').hide();
-                }
-            });
-        });
+        
 
         // data table function
         function bindGrid() {
@@ -572,6 +651,13 @@
             $("#chkIsTermsAccept").prop('checked', false).removeAttr('disabled', true);
             $('#btnSubmit').attr('disabled', 'disabled');
         }
+
+        $("#btnAddnew").click(function () {
+            $("#btnSubmit").show();
+            $("#btnUpdate").hide();
+            formReset();
+        });
+
     });
 
 </script>
