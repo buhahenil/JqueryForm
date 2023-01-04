@@ -499,6 +499,7 @@
                 if ($(this).is(':checked')) {
                     $('#btnSubmit').removeAttr('disabled');
                     $('#btnUpdate').removeAttr('disabled');
+                    //
                 } else {
                     $('#btnSubmit').attr('disabled', 'disabled');
                     $('#btnUpdate').attr('disabled', 'disabled');
@@ -512,10 +513,7 @@
             $('body').on('click', '#btnEdit', function () {
                 if ($('#btnUpdate').show()) {
                     $('#btnSubmit').hide();
-                }//else {
-                //   /*$('#btnUpdate').show();*/
-                //    $('#btnSubmit').hide();
-                //}
+                }
             });
         });
 
