@@ -428,29 +428,109 @@ namespace WebApplication1
         //update record code
         [WebMethod]
         [ScriptMethod]
-        public string UpdateRecord(String per) 
+        public Result UpdateRecord(string per) 
         {
+            Result result = new Result();
+            Person person = JsonConvert.DeserializeObject<Person>(per);
+
             SqlConnection db = new SqlConnection(connectionString);
             string update = "sppersonUpdate";
             db.Open();
             SqlCommand cmdupdate = new SqlCommand(update, db);
-
-            cmdupdate.Parameters.AddWithValue("@Pid", hdnPid.Value);
-            cmdupdate.Parameters.AddWithValue("@FirstName", txtFirstName.Text);
-            cmdupdate.Parameters.AddWithValue("@MiddleName", txtMiddleName.Text);
-            cmdupdate.Parameters.AddWithValue("@LastName", txtLastName.Text);
-            cmdupdate.Parameters.AddWithValue("@MoblieNumber", txtMoblieNumber.Text);
-            cmdupdate.Parameters.AddWithValue("@Address", txtAddress.Text);
-            cmdupdate.Parameters.AddWithValue("@Country", ddlCountry.SelectedValue);
-            cmdupdate.Parameters.AddWithValue("@State", ddlState.SelectedValue);
-            cmdupdate.Parameters.AddWithValue("@City", ddlCity.SelectedValue);
-            cmdupdate.Parameters.AddWithValue("@Pincode", txtPincode.Text);
-            cmdupdate.Parameters.AddWithValue("@DateOfBrith", txtDate.Text);
-            cmdupdate.Parameters.AddWithValue("@Gender", rblGender.SelectedItem.Value);
-            cmdupdate.Parameters.AddWithValue("@Hobbies", string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text)));
             cmdupdate.CommandType = CommandType.StoredProcedure;
-            cmdupdate.ExecuteNonQuery();
-            db.Close();
+
+            //cmdupdate.Parameters.AddWithValue("@Pid", Pid);
+            cmdupdate.Parameters.Add(new SqlParameter()
+            {
+                ParameterName = "@Pid",
+                Value = person.Pid
+            });
+            cmdupdate.Parameters.Add(new SqlParameter()
+            {
+                ParameterName = "@FirstName",
+                Value = person.FirstName
+            });
+            cmdupdate.Parameters.Add(new SqlParameter() 
+            {
+                ParameterName= "@MiddleName",
+                Value = person.MiddleName
+            }); 
+            cmdupdate.Parameters.Add(new SqlParameter()
+            {
+                ParameterName= "@LastName",
+                Value = person.LastName
+            });
+            cmdupdate.Parameters.Add(new SqlParameter()
+            {
+                ParameterName= "@MoblieNumber",
+                Value = person.Mobile
+            });
+            cmdupdate.Parameters.Add(new SqlParameter()
+            {
+                ParameterName = "@Address",
+                Value = person.Address
+            });
+            cmdupdate.Parameters.Add(new SqlParameter()
+            {
+                ParameterName= "@Country",
+                Value = person.Country
+            });
+            cmdupdate.Parameters.Add(new SqlParameter()
+            {
+                ParameterName= "@State",
+                Value = person.State
+            });
+            cmdupdate.Parameters.Add(new SqlParameter()
+            {
+                ParameterName= "@City",
+                Value = person.City
+            });
+            cmdupdate.Parameters.Add(new SqlParameter()
+            {
+                ParameterName= "@Pincode",
+                Value = person.Pincode
+            });
+            cmdupdate.Parameters.Add(new SqlParameter()
+            {
+                ParameterName= "@DateOfBrith",
+                Value = person.Birthday
+            });
+            cmdupdate.Parameters.Add(new SqlParameter()
+            {
+                ParameterName= "@Gender",
+                Value = person.Gender
+            });
+            cmdupdate.Parameters.Add(new SqlParameter()
+            {
+                ParameterName = "@Hobbies",
+                Value = person.Hobbies
+            });
+            
+            int resultQuery = cmdupdate.ExecuteNonQuery();
+            if (resultQuery == 1)
+            {
+                result.success = true;
+            }
+            return result;
+        }
+
+        //Record Delete
+        [WebMethod]
+        [ScriptMethod]
+        public void DeleteRecord(string Pid)
+        {
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("sppersonDelete", con);
+            con.Open();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            cmd.CommandType = CommandType.StoredProcedure;
+            DataTable dt = new DataTable();
+            cmd.Parameters.AddWithValue("@Pid", Pid);
+            cmd.ExecuteNonQuery();
+            sda.Fill(dt);
+            con.Close();
+
+            DataDisplay();
         }
     }
 }
