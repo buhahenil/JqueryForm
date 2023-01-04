@@ -337,9 +337,11 @@
             var dateofbrith = $(this).parents("tr").find('td:eq(11)').text();
             var gender = $(this).parents("tr").find('td:eq(12)').text();
             var hobbies = $(this).parents("tr").find('td:eq(13)').text();
-            var termsandconditions = $(this).parents("tr").find('td:eq(14)').text();//.toString();
+            var termsandconditions = $(this).parents("tr").find('td:eq(14)').text().toString();
 
             //debugger;
+
+
             // data fill the form
             var data = {};
             data.Pid = pid;
@@ -413,8 +415,8 @@
             success: function (data) {
                 //console.log(data);
                 for (let i = 0; i < data.length; i++) {
-                    $("#tblGridview").append('<tr>   <td>' + data[i].Pid + '</td>   <td align="center">' + data[i].PRID + '</td>   <td align="center">' + data[i].FirstName + '</td>  <td align="center">' + data[i].MiddleName + '</td>     <td align="center">' + data[i].LastName + '</td>     <td align="center">' + data[i].MoblieNumber + '</td>    <td align="center">' + data[i].Address + '</td>    <td align="center">' + data[i].Country + '</td>     <td align="center">' + data[i].State + '</td>    <td align="center">' + data[i].City + '</td>    <td align="center">' + data[i].Pincode + '</td>   <td align="center">' + data[i].DateOfBrith + '</td>   <td align="center">' + data[i].Gender + '</td>   <td align="center">' + data[i].Hobbies + '</td>  <td align="center"><input type="checkbox" id="cheTeam" disabled="true" name="TermsAndConditions" value="true" ></td>    <td><input type="button" id="btnEdit" value="Edit"> </td><td><input type="button" id="btnDelete" value="Delete"></td>  </tr>');
-                    /*console.log(data[i].TermsAndConditions);*/
+                    $("#tblGridview").append('<tr>   <td>' + data[i].Pid + '</td>   <td align="center">' + data[i].PRID + '</td>   <td align="center">' + data[i].FirstName + '</td>  <td align="center">' + data[i].MiddleName + '</td>     <td align="center">' + data[i].LastName + '</td>     <td align="center">' + data[i].MoblieNumber + '</td>    <td align="center">' + data[i].Address + '</td>    <td align="center">' + data[i].Country + '</td>     <td align="center">' + data[i].State + '</td>    <td align="center">' + data[i].City + '</td>    <td align="center">' + data[i].Pincode + '</td>   <td align="center">' + data[i].DateOfBrith + '</td>   <td align="center">' + data[i].Gender + '</td>   <td align="center">' + data[i].Hobbies + '</td>  <td align="center"><input type="checkbox" id="cheTeam" disabled="true" name="TermsAndConditions" checked=?data[i].TermsAndConditions ?></td>    <td><input type="button" id="btnEdit" value="Edit"> </td><td><input type="button" id="btnDelete" value="Delete"></td>  </tr>');
+                    //console.log(data[i].TermsAndConditions);
                 };
             },
             error: function (err) {
