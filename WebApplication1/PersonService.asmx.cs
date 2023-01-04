@@ -426,7 +426,31 @@ namespace WebApplication1
 
 
         //update record code
-        
+        [WebMethod]
+        [ScriptMethod]
+        public string UpdateRecord(String per) 
+        {
+            SqlConnection db = new SqlConnection(connectionString);
+            string update = "sppersonUpdate";
+            db.Open();
+            SqlCommand cmdupdate = new SqlCommand(update, db);
 
+            cmdupdate.Parameters.AddWithValue("@Pid", hdnPid.Value);
+            cmdupdate.Parameters.AddWithValue("@FirstName", txtFirstName.Text);
+            cmdupdate.Parameters.AddWithValue("@MiddleName", txtMiddleName.Text);
+            cmdupdate.Parameters.AddWithValue("@LastName", txtLastName.Text);
+            cmdupdate.Parameters.AddWithValue("@MoblieNumber", txtMoblieNumber.Text);
+            cmdupdate.Parameters.AddWithValue("@Address", txtAddress.Text);
+            cmdupdate.Parameters.AddWithValue("@Country", ddlCountry.SelectedValue);
+            cmdupdate.Parameters.AddWithValue("@State", ddlState.SelectedValue);
+            cmdupdate.Parameters.AddWithValue("@City", ddlCity.SelectedValue);
+            cmdupdate.Parameters.AddWithValue("@Pincode", txtPincode.Text);
+            cmdupdate.Parameters.AddWithValue("@DateOfBrith", txtDate.Text);
+            cmdupdate.Parameters.AddWithValue("@Gender", rblGender.SelectedItem.Value);
+            cmdupdate.Parameters.AddWithValue("@Hobbies", string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text)));
+            cmdupdate.CommandType = CommandType.StoredProcedure;
+            cmdupdate.ExecuteNonQuery();
+            db.Close();
+        }
     }
 }

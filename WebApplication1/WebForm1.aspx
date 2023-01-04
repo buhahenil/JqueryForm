@@ -321,7 +321,7 @@
             }
         });
 
-        // data on edit button 
+        // data on edit button and fill in forms
         $('body').on('click', '#btnEdit', function () {
             var pid = $(this).parents("tr").find('td:eq(0)').text();
             var prid = $(this).parents("tr").find('td:eq(1)').text();
