@@ -221,6 +221,7 @@
                         alert(data.d.error);
                     } else {
                         formReset();
+                        bindGrid();
                     }
                     //debugger;
                     console.log(data);
@@ -453,21 +454,21 @@
 
         //Delete button
         $('body').on('click', '#btnDelete', function () {
-            //var pid = $(this).parents("tr").find('td:eq(0)').text();
-            //var prid = $(this).parents("tr").find('td:eq(1)').text();
-            //var firstname = $(this).parents("tr").find('td:eq(2)').text();
-            //var middlename = $(this).parents("tr").find('td:eq(3)').text();
-            //var lastname = $(this).parents("tr").find('td:eq(4)').text();
-            //var mobilenumber = $(this).parents("tr").find('td:eq(5)').text();
-            //var address = $(this).parents("tr").find('td:eq(6)').text();
-            //var country = $(this).parents("tr").find('td:eq(7)').text();
-            //var state = $(this).parents("tr").find('td:eq(8)').text();
-            //var city = $(this).parents("tr").find('td:eq(9)').text();
-            //var pincode = $(this).parents("tr").find('td:eq(10)').text();
-            //var dateofbrith = $(this).parents("tr").find('td:eq(11)').text();
-            //var gender = $(this).parents("tr").find('td:eq(12)').text();
-            //var hobbies = $(this).parents("tr").find('td:eq(13)').text();
-            //var termsandconditions = $(this).parents("tr").find('td:eq(14)').text().toString();
+            var pid = $(this).parents("tr").find('td:eq(0)').text();
+            var prid = $(this).parents("tr").find('td:eq(1)').text();
+            var firstname = $(this).parents("tr").find('td:eq(2)').text();
+            var middlename = $(this).parents("tr").find('td:eq(3)').text();
+            var lastname = $(this).parents("tr").find('td:eq(4)').text();
+            var mobilenumber = $(this).parents("tr").find('td:eq(5)').text();
+            var address = $(this).parents("tr").find('td:eq(6)').text();
+            var country = $(this).parents("tr").find('td:eq(7)').text();
+            var state = $(this).parents("tr").find('td:eq(8)').text();
+            var city = $(this).parents("tr").find('td:eq(9)').text();
+            var pincode = $(this).parents("tr").find('td:eq(10)').text();
+            var dateofbrith = $(this).parents("tr").find('td:eq(11)').text();
+            var gender = $(this).parents("tr").find('td:eq(12)').text();
+            var hobbies = $(this).parents("tr").find('td:eq(13)').text();
+            var termsandconditions = $(this).parents("tr").find('td:eq(14)').text().toString();
 
             //debugger;
             // data fill the form
@@ -480,49 +481,8 @@
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(data),
                 success: function (res) {
-                    //console.log(res);
                     var arrData = JSON.parse(res.d);
                     $("#hdnPid").val(pid);
-                    $("#txtFirstName").val(arrData[0].FirstName);
-                    $("#txtMiddleName").val(arrData[0].MiddleName);
-                    $("#txtLastName").val(arrData[0].LastName);
-                    $("#txtMobile").val(arrData[0].MoblieNumber);
-                    $("#txtAddress").val(arrData[0].Address);
-
-                    $("#ddlCountry").val(arrData[0].Country);
-                    $("#ddlCountry").trigger('change');
-                    setTimeout(() => {
-                        $("#ddlState").val(arrData[0].State);
-                        $("#ddlState").trigger('change');
-                        setTimeout(() => {
-                            $("#ddlCity").val(arrData[0].City);
-                        }, 500)
-                    }, 500);
-
-                    $("#txtPinCode").val(arrData[0].Pincode);
-
-                    // Date
-                    var year = new Date(arrData[0].DateOfBrith).getFullYear();
-                    var month = (new Date(arrData[0].DateOfBrith).getMonth() + 1) < 10 ? ("0" + (new Date(arrData[0].DateOfBrith).getMonth() + 1)) : (new Date(arrData[0].DateOfBrith).getMonth() + 1);
-                    var day = (new Date(arrData[0].DateOfBrith).getDate()) < 10 ? ("0" + (new Date(arrData[0].DateOfBrith).getDate())) : (new Date(arrData[0].DateOfBrith).getDate());
-                    $("#txtbirthday").val(year + "-" + month + "-" + day);
-
-                    // gender
-                    $('[name="gender"]').removeAttr('checked');
-                    $("input[name=gender][id=" + arrData[0].Gender.toLowerCase() + "]").prop('checked', true);
-
-                    // hobbies
-                    $('[name="cblHobbies$0"]').prop('checked', false);
-                    var arr = arrData[0].Hobbies.split(',');
-                    for (var i = 0; i < arr.length; i++) {
-                        $("input:checkbox[class=ads_Checkbox][value=" + arr[i] + "]").prop('checked', true);
-                    }
-
-                    /*debugger;*/
-                    $("#chkIsTermsAccept").removeAttr('checked');
-                    $("#chkIsTermsAccept").val(arrData[0].TermsAndConditions).attr('checked', true);
-                    //console.log(arrData[0].TermsAndConditions);
-                    debugger;
                 },
                 error: function (err) {
                     console.log(err);
@@ -539,8 +499,6 @@
                 if ($(this).is(':checked')) {
                     $('#btnSubmit').removeAttr('disabled');
                     $('#btnUpdate').removeAttr('disabled');
-
-                    //$('#btnUpdate').show();
                 } else {
                     $('#btnSubmit').attr('disabled', 'disabled');
                     $('#btnUpdate').attr('disabled', 'disabled');

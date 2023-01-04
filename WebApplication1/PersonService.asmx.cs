@@ -439,6 +439,206 @@ namespace WebApplication1
             SqlCommand cmdupdate = new SqlCommand(update, db);
             cmdupdate.CommandType = CommandType.StoredProcedure;
 
+            /*----------------------------------------------------*/
+            // FirstName
+            if (string.IsNullOrWhiteSpace(person.FirstName))
+            {
+                result.success = false;
+                result.error = "FirstName should be required.";
+                return result;
+            }
+            if (person.FirstName.Length > 50)
+            {
+                result.success = false;
+                result.error = "Maximum 50 characters allowed.";
+                return result;
+            }
+            string strRegex = @"(^[A-Z a-z]*$)";
+            Regex re = new Regex(strRegex);
+            if (!re.IsMatch(person.FirstName))
+            {
+                result.success = false;
+                result.error = "Enter the Only alphabets for FirstName.";
+                return result;
+            }
+
+            //MiddleName...
+            if (person.MiddleName.Length > 50)
+            {
+                result.success = false;
+                result.error = "Maximum 50 characters allowed.";
+                return result;
+            }
+            string middlename = @"(^[A-Z a-z]*$)";
+            Regex mddname = new Regex(middlename);
+            if (!mddname.IsMatch(person.MiddleName))
+            {
+                result.success = false;
+                result.error = "Enter the Only alphabets for MiddleName.";
+                return result;
+            }
+
+            //LastName 
+            if (string.IsNullOrWhiteSpace(person.LastName))
+            {
+                result.success = false;
+                result.error = "LastName should be required.";
+                return result;
+            }
+            if (person.LastName.Length > 50)
+            {
+                result.success = false;
+                result.error = "Maximum 50 characters allowed.";
+                return result;
+            }
+            string lastname = @"(^[A-Z a-z]*$)";
+            Regex Lastname = new Regex(lastname);
+            if (!Lastname.IsMatch(person.LastName))
+            {
+                result.success = false;
+                result.error = "Enter the Only alphabets for LastName.";
+                return result;
+            }
+
+            //--------------- Moblie Number ----------------
+            if (string.IsNullOrWhiteSpace(person.Mobile))
+            {
+                result.success = false;
+                result.error = "Moblie Number should be required.";
+                return result;
+            }
+            if (person.Mobile.Length < 10)
+            {
+                result.success = false;
+                result.error = "only enter 10 digit moblie number.";
+                return result;
+            }
+            string moblie = @"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$";
+            Regex moblienum = new Regex(moblie);
+            if (!moblienum.IsMatch(person.Mobile))
+            {
+                result.success = false;
+                result.error = "Enter Only Number For Moblie Number.";
+                return result;
+            }
+
+            //SqlConnection conMoblie = new SqlConnection(connectionString);
+            //SqlCommand cmdMoblie = new SqlCommand("sppersonSelectedbyMobile", conMoblie);
+            //conMoblie.Open();
+            //SqlDataAdapter sda = new SqlDataAdapter(cmdMoblie);
+            //cmdMoblie.CommandType = CommandType.StoredProcedure;
+            //DataTable dt = new DataTable();
+            //cmdMoblie.Parameters.AddWithValue("@MoblieNumber", person.Mobile);
+            //sda.Fill(dt);
+            //if (dt.Rows.Count > 0)
+            //{
+            //    result.success = false;
+            //    result.error = "Enter the Different Moblie Number.";
+            //    return result;
+            //}
+
+            //---------- Address ---------
+            if (string.IsNullOrWhiteSpace(person.Address))
+            {
+                result.success = false;
+                result.error = "Address should be required.";
+                return result;
+            }
+            if (person.Address.Length > 200)
+            {
+                result.success = false;
+                result.error = "Only Enter 200 character.";
+                return result;
+            }
+
+            //----------- Country ---------
+            if (person.Country == "0")
+            {
+                result.success = false;
+                result.error = "Select Country.";
+                return result;
+            }
+
+            //--------- State----------
+            if (person.State == "0")
+            {
+                result.success = false;
+                result.error = "Select State.";
+                return result;
+            }
+
+            //--------- City----------
+            if (person.City == "0")
+            {
+                result.success = false;
+                result.error = "City State.";
+                return result;
+            }
+
+            //---------- Pin Code --------
+            if (string.IsNullOrWhiteSpace(person.Pincode))
+            {
+                result.success = false;
+                result.error = "PinCode should be required.";
+                return result;
+            }
+            string pincode = @"^[1-9][0-9]{5}$";
+            Regex Pincode = new Regex(pincode);
+            if (!Pincode.IsMatch(person.Pincode))
+            {
+                result.success = false;
+                result.error = "Enetr only 6 Digit.";
+                return result;
+            }
+            //if (person.Pincode.Length < 6)
+            //{
+            //    result.success = false;
+            //    result.error = "Enetr only 6 Digit";
+            //    return result;
+            //}
+
+
+            //---------- date of brithday -------------
+            if (string.IsNullOrEmpty(person.Birthday))
+            {
+                result.success = false;
+                result.error = "Date Of Brith should be required.";
+                return result;
+            }
+            var today = DateTime.Today;
+            var age = today.Year - Convert.ToDateTime(person.Birthday).Year;
+            if (Convert.ToDateTime(person.Birthday).Date > today.AddYears(-age)) age--;
+            if (age < 18 || age > 200)
+            {
+                result.success = false;
+                result.error = "Age should be more than 18.";
+                return result;
+            }
+
+            //----------- Gender ---------
+            if (string.IsNullOrEmpty(person.Gender))
+            {
+                result.success = false;
+                result.error = "Gender should be required.";
+                return result;
+            }
+
+            //------------ Hobbies ------------
+            if (string.IsNullOrEmpty(person.Hobbies))
+            {
+                result.success = false;
+                result.error = "Hobbies should be required.";
+                return result;
+            }
+            if (person.Hobbies.Split(',').Length < 3)
+            {
+                result.success = false;
+                result.error = "Minimun 3 Selected Hobbies";
+                return result;
+            }
+
+
+
             //cmdupdate.Parameters.AddWithValue("@Pid", Pid);
             cmdupdate.Parameters.Add(new SqlParameter()
             {
