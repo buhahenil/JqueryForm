@@ -48,7 +48,7 @@ namespace WebApplication1
             if (person.FirstName.Length > 50)
             {
                 result.success = false;
-                result.error = "Maximum 50 characters allowed.";
+                result.error = "FirstName in Maximum 50 characters allowed.";
                 return result;
             }
             string strRegex = @"(^[A-Z a-z]*$)";
@@ -64,7 +64,7 @@ namespace WebApplication1
             if (person.MiddleName.Length > 50)
             {
                 result.success = false;
-                result.error = "Maximum 50 characters allowed.";
+                result.error = "MiddleName in Maximum 50 characters allowed.";
                 return result;
             }
             string middlename = @"(^[A-Z a-z]*$)";
@@ -86,7 +86,7 @@ namespace WebApplication1
             if (person.LastName.Length > 50)
             {
                 result.success = false;
-                result.error = "Maximum 50 characters allowed.";
+                result.error = "LastName in Maximum 50 characters allowed.";
                 return result;
             }
             string lastname = @"(^[A-Z a-z]*$)";
@@ -145,7 +145,7 @@ namespace WebApplication1
             if (person.Address.Length > 200)
             {
                 result.success = false;
-                result.error = "Only Enter 200 character.";
+                result.error = "Only Enter 200 character in Address.";
                 return result;
             }
 
@@ -450,7 +450,7 @@ namespace WebApplication1
             if (person.FirstName.Length > 50)
             {
                 result.success = false;
-                result.error = "Maximum 50 characters allowed.";
+                result.error = "FirstName in Maximum 50 characters allowed.";
                 return result;
             }
             string strRegex = @"(^[A-Z a-z]*$)";
@@ -466,7 +466,7 @@ namespace WebApplication1
             if (person.MiddleName.Length > 50)
             {
                 result.success = false;
-                result.error = "Maximum 50 characters allowed.";
+                result.error = "MiddleName in Maximum 50 characters allowed.";
                 return result;
             }
             string middlename = @"(^[A-Z a-z]*$)";
@@ -488,7 +488,7 @@ namespace WebApplication1
             if (person.LastName.Length > 50)
             {
                 result.success = false;
-                result.error = "Maximum 50 characters allowed.";
+                result.error = "LastName in Maximum 50 characters allowed.";
                 return result;
             }
             string lastname = @"(^[A-Z a-z]*$)";
@@ -547,7 +547,7 @@ namespace WebApplication1
             if (person.Address.Length > 200)
             {
                 result.success = false;
-                result.error = "Only Enter 200 character.";
+                result.error = "Only Enter 200 character in Address.";
                 return result;
             }
 

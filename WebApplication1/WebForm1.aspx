@@ -225,7 +225,7 @@
                         bindGrid();
                     }
                     //debugger;
-                    console.log(data);
+                    //console.log(data);
                 },
                 error: function (err) {
                     //debugger;
@@ -514,11 +514,10 @@
                         $("input:checkbox[class=ads_Checkbox][value=" + arr[i] + "]").prop('checked', true);
                     }
 
-                    /*debugger;*/
-                    $("#chkIsTermsAccept").removeAttr('checked');
-                    $("#chkIsTermsAccept").val(arrData[0].TermsAndConditions).attr('checked', true);
-                    //console.log(arrData[0].TermsAndConditions);
-                    debugger;
+                    $("#chkIsTermsAccept").removeProp('checked');
+                    $("#chkIsTermsAccept").val(arrData[0].TermsAndConditions).prop('checked', true);
+                   
+                    // button update show and submit button hide
                     $('#btnUpdate').show()
                     $('#btnSubmit').hide();
                     if ($("#chkIsTermsAccept").is(':checked')) {
@@ -528,7 +527,6 @@
                     } else {
                         $('#btnSubmit').attr('disabled', 'disabled');
                         $('#btnUpdate').attr('disabled', 'disabled');
-
                     }
                 },
                 error: function (err) {
@@ -539,6 +537,7 @@
 
         //Delete button
         $('body').on('click', '#btnDelete', function () {
+            $(this).closest("tr").remove();
             var pid = $(this).parents("tr").find('td:eq(0)').text();
             var prid = $(this).parents("tr").find('td:eq(1)').text();
             var firstname = $(this).parents("tr").find('td:eq(2)').text();
@@ -556,7 +555,7 @@
             var termsandconditions = $(this).parents("tr").find('td:eq(14)').text().toString();
 
             //debugger;
-            // data fill the form
+           
             var data = {};
             data.Pid = pid;
             $.ajax({
@@ -568,6 +567,7 @@
                 success: function (res) {
                     var arrData = JSON.parse(res.d);
                     $("#hdnPid").val(pid);
+                    
                 },
                 error: function (err) {
                     console.log(err);
@@ -592,9 +592,6 @@
                 }
             });
         });
-
-        // button submit and update hide and show
-        
 
         // data table function
         function bindGrid() {
