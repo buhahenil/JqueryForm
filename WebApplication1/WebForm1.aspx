@@ -37,7 +37,7 @@
         <br />
         <br />
         <div align="center">
-            <input type="button" id="btnAddnew" value="Add New" />
+            <input type="button" id="btnAddnew" value="Add New" style="background-color:MediumSlateBlue; color:white" />
         </div>
         <br />
         <table border="2" id="tblForms" align="center">
@@ -175,8 +175,8 @@
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center; align-items: center; align-content: center; align-self: center;">
-                    <input type="button" name="Submit" value="Sumbit" id="btnSubmit" disabled="disabled" style="height: 26px"  />
-                    <input type="button" name="Update " value="Update" id="btnUpdate" disabled="disabled" style="height: 26px" />
+                    <input type="button" name="Submit" value="Sumbit" id="btnSubmit" disabled="disabled" style="height: 26px; background-color:CornflowerBlue; color:white"  />
+                    <input type="button" name="Update " value="Update" id="btnUpdate" disabled="disabled" style="height: 26px; background-color:CornflowerBlue; color:white" />
                 </td>
             </tr>
         </table>
@@ -603,7 +603,7 @@
                     //console.log(data);
                     $("#tblGridview").find('tbody').html('');
                     for (let i = 0; i < data.length; i++) {
-                        $("#tblGridview").find('tbody').append('<tr>   <td>' + data[i].Pid + '</td>   <td align="center">' + data[i].PRID + '</td>   <td align="center">' + data[i].FirstName + '</td>  <td align="center">' + data[i].MiddleName + '</td>     <td align="center">' + data[i].LastName + '</td>     <td align="center">' + data[i].MoblieNumber + '</td>    <td align="center">' + data[i].Address + '</td>    <td align="center">' + data[i].Country + '</td>     <td align="center">' + data[i].State + '</td>    <td align="center">' + data[i].City + '</td>    <td align="center">' + data[i].Pincode + '</td>   <td align="center">' + data[i].DateOfBrith + '</td>   <td align="center">' + data[i].Gender + '</td>   <td align="center">' + data[i].Hobbies + '</td>  <td align="center"><input type="checkbox" id="cheTeam" disabled="true" name="TermsAndConditions" checked=?data[i].TermsAndConditions ?></td>    <td><input type="button" id="btnEdit" value="Edit"> </td><td><input type="button" id="btnDelete" value="Delete"></td>  </tr>');
+                        $("#tblGridview").find('tbody').append('<tr>   <td>' + data[i].Pid + '</td>   <td align="center">' + data[i].PRID + '</td>   <td align="center">' + data[i].FirstName + '</td>  <td align="center">' + data[i].MiddleName + '</td>     <td align="center">' + data[i].LastName + '</td>     <td align="center">' + data[i].MoblieNumber + '</td>    <td align="center">' + data[i].Address + '</td>    <td align="center">' + data[i].Country + '</td>     <td align="center">' + data[i].State + '</td>    <td align="center">' + data[i].City + '</td>    <td align="center">' + data[i].Pincode + '</td>   <td align="center">' + data[i].DateOfBrith + '</td>   <td align="center">' + data[i].Gender + '</td>   <td align="center">' + data[i].Hobbies + '</td>  <td align="center"><input type="checkbox" id="cheTeam" disabled="true" name="TermsAndConditions" checked=?data[i].TermsAndConditions ?></td>    <td><input type="button" id="btnEdit" value="Edit" style="background-color:RoyalBlue; color:white"> </td><td><input type="button" id="btnDelete" value="Delete" style="background-color:Red; color:white"></td>  </tr>');
                         //console.log(data[i].TermsAndConditions);
                     };
                 },
@@ -654,7 +654,6 @@
             $("#btnUpdate").hide();
             formReset();
         });
-
     });
 
 </script>
