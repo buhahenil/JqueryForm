@@ -89,6 +89,7 @@ namespace WebApplication1
                 result.error = "LastName in Maximum 50 characters allowed.";
                 return result;
             }
+
             string lastname = @"(^[A-Z a-z]*$)";
             Regex Lastname = new Regex(lastname);
             if (!Lastname.IsMatch(person.LastName))
@@ -148,6 +149,14 @@ namespace WebApplication1
                 result.error = "Only Enter 200 character in Address.";
                 return result;
             }
+            //string address = @"/[a-z\d\-_\s]$/i,";
+            //Regex addressA = new Regex(address);
+            //if (!addressA.IsMatch(person.Address))
+            //{
+            //    result.success = false;
+            //    result.error = "Enetr only alphanumeric, dash , underscore and space are allowed.";
+            //    return result;
+            //}
 
             //----------- Country ---------
             if (person.Country == "0")
