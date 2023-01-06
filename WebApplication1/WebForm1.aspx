@@ -592,6 +592,14 @@
                 }
             });
         });
+        $('#tblGridview').dataTable({
+            //initialization params as usual
+            fnInitComplete: function () {
+                if ($(this).find('tbody tr').length <= 1) {
+                    $(this).parent().hide();
+                }
+            }
+        });
 
         // data table function
         function bindGrid() {
