@@ -149,14 +149,14 @@ namespace WebApplication1
                 result.error = "Only Enter 200 character in Address.";
                 return result;
             }
-            string address = @"^[A-Za-z0-9]+(?:\s[A-Za-z0-9'_-]+)+$";
-            Regex Address = new Regex(address);
-            if (!Address.IsMatch(person.Address))
-            {
-                result.success = false;
-                result.error = "Enetr alphanumeric, dash, underscore are allowed.";
-                return result;
-            }
+            //string address = @"^[ A-Za-z0-9]$";
+            //Regex Address = new Regex(address);
+            //if (!Address.IsMatch(person.Address))
+            //{
+            //    result.success = false;
+            //    result.error = "Enetr alphanumeric, dash, underscore are allowed.";
+            //    return result;
+            //}
 
             //----------- Country ---------
             if (person.Country == "0")
