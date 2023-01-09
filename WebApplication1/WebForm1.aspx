@@ -9,8 +9,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <table border="2" id="tblGridview" align="center">
-           
+       <div id="dataMsg" style="display:none"> There are no records </div>
+        <table border="2" id="tblGridview" align="center" >
                 <thead>
                     <tr>
                         <th>Pid</th>
@@ -32,9 +32,11 @@
                         <th>Delete</th>
                     </tr>
                 </thead>
+            
              <tbody>
             </tbody>
         </table>
+            </div>
         <br />
         <br />
         <div align="center">
@@ -225,6 +227,7 @@
                     } else {
                         formReset();
                         bindGrid();
+                        
                     }
                     //debugger;
                     //console.log(data);
@@ -569,7 +572,7 @@
                 success: function (res) {
                     var arrData = JSON.parse(res.d);
                     $("#hdnPid").val(pid);
-                    
+                    Msg();
                 },
                 error: function (err) {
                     console.log(err);
@@ -579,7 +582,7 @@
 
         // data table function call 
         bindGrid();
-
+        
         
         /* disable button */
         $(function () {
@@ -595,7 +598,6 @@
                 }
             });
         });
-        
 
         // data table function
         function bindGrid() {
@@ -610,10 +612,18 @@
                         $("#tblGridview").find('tbody').append('<tr>   <td align="center">' + data[i].Pid + '</td>   <td align="center">' + data[i].PRID + '</td>   <td align="center">' + data[i].FirstName + '</td>  <td align="center">' + data[i].MiddleName + '</td>     <td align="center">' + data[i].LastName + '</td>     <td align="center">' + data[i].MoblieNumber + '</td>    <td align="center">' + data[i].Address + '</td>    <td align="center">' + data[i].Country + '</td>     <td align="center">' + data[i].State + '</td>    <td align="center">' + data[i].City + '</td>    <td align="center">' + data[i].Pincode + '</td>   <td align="center">' + data[i].DateOfBrith + '</td>   <td align="center">' + data[i].Gender + '</td>   <td align="center">' + data[i].Hobbies + '</td>  <td align="center"><input type="checkbox" id="cheTeam" disabled="true" name="TermsAndConditions" checked=?data[i].TermsAndConditions ?></td>    <td><input type="button" id="btnEdit" value="Edit" style="background-color:RoyalBlue; color:white"> </td><td><input type="button" id="btnDelete" value="Delete" style="background-color:Red; color:white"></td>  </tr>');
                         
                     };
+                    function Msg() {
+                    if (data.length == 0)
+                    {
+                        $("#tblGridview").css('display', 'none');
+                        $("#dataMsg").css('display', 'block');
+                        }
+                    } Msg();
                 },
                 error: function (err) {
                     console.log(err);
-                }
+                },
+                
                 //console.log(data); console.log(data[0].Pid); console.log(data[0]["Pid"]);
             });
         }
