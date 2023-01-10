@@ -599,14 +599,7 @@ namespace WebApplication1
                 result.error = "Enetr only 6 Digit.";
                 return result;
             }
-            //if (person.Pincode.Length < 6)
-            //{
-            //    result.success = false;
-            //    result.error = "Enetr only 6 Digit";
-            //    return result;
-            //}
-
-
+            
             //---------- date of brithday -------------
             if (string.IsNullOrEmpty(person.Birthday))
             {
